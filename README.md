@@ -20,6 +20,8 @@ yarn add @studio-otto/shop-base-components
 description goes here
 
 ```
+import { AnnouncementBar } from '@studio-otto/shop-base-components'
+
   <announcement-bar
       :enabled="true"
       backgroundColor="#220e89"

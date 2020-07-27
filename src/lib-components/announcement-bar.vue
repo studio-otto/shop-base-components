@@ -7,8 +7,8 @@
     class="announcement-bar"
   >
     <a
-      :aria-label="{{ slides[this.currentSlide].text}}"
-      href=""
+      :aria-label="slides[this.currentSlide].text"
+      :href="slides[this.currentSlide].url"
       v-if="slides[this.currentSlide].url"
     >
       {{ slides[this.currentSlide].text }}

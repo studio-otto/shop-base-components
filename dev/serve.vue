@@ -18,11 +18,8 @@ export default Vue.extend({
     <announcement-bar
       :enabled="true"
       backgroundColor="#220e89"
+      :slides="[{ text: 'Hello world' }]"
       textColor="#FFF"
-      :slides="[
-        { url: '', text: 'Hello world' },
-        { url: '', text: 'Lorem ipsum dolor sit amet' }
-      ]"
     />
   </div>
 </template>

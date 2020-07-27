@@ -248,7 +248,120 @@ var __vue_is_functional_template__ = false;
 var __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,ShopBaseComponentsSample: __vue_component__});var install = function installShopBaseComponents(Vue) {
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, createInjectorSSR, undefined);//
+//
+//
+//
+//
+//
+//
+//
+var script$1 = {
+  name: 'AnnouncementBar',
+  data: function data() {
+    return {
+      currentSlide: 0
+    };
+  },
+  props: {
+    enabled: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      }
+    },
+    textColor: {
+      type: String,
+      // TODO validate hex color
+      default: function _default() {
+        return '';
+      }
+    },
+    backgroundColor: {
+      // TODO validate hex color
+      type: String,
+      default: function _default() {
+        return '';
+      }
+    },
+    slides: {
+      // TODO validate array of objects
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    speed: {
+      type: Number,
+      default: function _default() {
+        return 1000;
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.init();
+  },
+  methods: {
+    init: function init() {
+      var _this = this;
+
+      setInterval(function () {
+        _this.currentSlide === _this.slides.length + 1 ? _this.currentSlide = 0 : _this.currentSlide += 1;
+      }, this.speed);
+    }
+  },
+  computed: {
+    cssProps: function cssProps() {
+      return {
+        '--text-color': this.textColor,
+        '--background-color': this.backgroundColor
+      };
+    }
+  }
+};/* script */
+var __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function __vue_render__() {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _vm.enabled ? _c('div', {
+    staticClass: "announcement-bar",
+    style: _vm.cssProps
+  }, [_vm._ssrNode("<span data-v-9e9aa67a>" + _vm._ssrEscape("\n    " + _vm._s(_vm.slides[this.currentSlide].text) + "\n  ") + "</span>")]) : _vm._e();
+};
+
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+var __vue_inject_styles__$1 = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-9e9aa67a_0", {
+    source: ".announcement-bar[data-v-9e9aa67a]{background:var(--background-color);color:var(--text-color)}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+var __vue_scope_id__$1 = "data-v-9e9aa67a";
+/* module identifier */
+
+var __vue_module_identifier__$1 = "data-v-9e9aa67a";
+/* functional template */
+
+var __vue_is_functional_template__$1 = false;
+/* style inject shadow dom */
+
+var __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, createInjectorSSR, undefined);/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,ShopBaseComponentsSample: __vue_component__,AnnouncementBar: __vue_component__$1});var install = function installShopBaseComponents(Vue) {
   if (install.installed) return;
   install.installed = true;
   Object.entries(components).forEach(function (_ref) {
@@ -281,4 +394,4 @@ var plugin = {
     GlobalVue.use(plugin);
   }
 } // Default export is library as a whole, registered via Vue.use()
-exports.ShopBaseComponentsSample=__vue_component__;exports.default=plugin;
+exports.AnnouncementBar=__vue_component__$1;exports.ShopBaseComponentsSample=__vue_component__;exports.default=plugin;

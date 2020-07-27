@@ -247,11 +247,135 @@ const __vue_component__ = /*#__PURE__*/normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
 
+//
+//
+//
+//
+//
+//
+//
+//
+var script$1 = {
+  name: 'AnnouncementBar',
+
+  data() {
+    return {
+      currentSlide: 0
+    };
+  },
+
+  props: {
+    enabled: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
+    },
+    textColor: {
+      type: String,
+      // TODO validate hex color
+      default: () => {
+        return '';
+      }
+    },
+    backgroundColor: {
+      // TODO validate hex color
+      type: String,
+      default: () => {
+        return '';
+      }
+    },
+    slides: {
+      // TODO validate array of objects
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    speed: {
+      type: Number,
+      default: () => {
+        return 1000;
+      }
+    }
+  },
+
+  mounted() {
+    this.init();
+  },
+
+  methods: {
+    init() {
+      setInterval(() => {
+        this.currentSlide === this.slides.length + 1 ? this.currentSlide = 0 : this.currentSlide += 1;
+      }, this.speed);
+    }
+
+  },
+  computed: {
+    cssProps() {
+      return {
+        '--text-color': this.textColor,
+        '--background-color': this.backgroundColor
+      };
+    }
+
+  }
+};
+
+/* script */
+const __vue_script__$1 = script$1;
+/* template */
+
+var __vue_render__$1 = function () {
+  var _vm = this;
+
+  var _h = _vm.$createElement;
+
+  var _c = _vm._self._c || _h;
+
+  return _vm.enabled ? _c('div', {
+    staticClass: "announcement-bar",
+    style: _vm.cssProps
+  }, [_c('span', [_vm._v("\n    " + _vm._s(_vm.slides[this.currentSlide].text) + "\n  ")])]) : _vm._e();
+};
+
+var __vue_staticRenderFns__$1 = [];
+/* style */
+
+const __vue_inject_styles__$1 = function (inject) {
+  if (!inject) return;
+  inject("data-v-9e9aa67a_0", {
+    source: ".announcement-bar[data-v-9e9aa67a]{background:var(--background-color);color:var(--text-color)}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+
+
+const __vue_scope_id__$1 = "data-v-9e9aa67a";
+/* module identifier */
+
+const __vue_module_identifier__$1 = undefined;
+/* functional template */
+
+const __vue_is_functional_template__$1 = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__$1 = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__$1,
+  staticRenderFns: __vue_staticRenderFns__$1
+}, __vue_inject_styles__$1, __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, createInjector, undefined, undefined);
+
 /* eslint-disable import/prefer-default-export */
 
 var components = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  ShopBaseComponentsSample: __vue_component__
+  ShopBaseComponentsSample: __vue_component__,
+  AnnouncementBar: __vue_component__$1
 });
 
 // Import vue components
@@ -270,4 +394,4 @@ const plugin = {
 }; // To auto-install on non-es builds, when vue is found
 
 export default plugin;
-export { __vue_component__ as ShopBaseComponentsSample };
+export { __vue_component__$1 as AnnouncementBar, __vue_component__ as ShopBaseComponentsSample };

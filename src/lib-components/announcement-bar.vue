@@ -1,11 +1,15 @@
 <template>
   <div
+    role="banner"
     data-testid="announcement-bar"
     :style="cssProps"
     v-if="enabled"
     class="announcement-bar"
   >
-    <span>
+    <a href="" v-if="slides[this.currentSlide].url">
+      {{ slides[this.currentSlide].text }}
+    </a>
+    <span v-else>
       {{ slides[this.currentSlide].text }}
     </span>
   </div>

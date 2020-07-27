@@ -6,7 +6,11 @@
     v-if="enabled"
     class="announcement-bar"
   >
-    <a href="" v-if="slides[this.currentSlide].url">
+    <a
+      :aria-label="{{ slides[this.currentSlide].text}}"
+      href=""
+      v-if="slides[this.currentSlide].url"
+    >
       {{ slides[this.currentSlide].text }}
     </a>
     <span v-else>

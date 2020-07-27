@@ -85,5 +85,10 @@ export default {
 .announcement-bar {
   background: var(--background-color);
   color: var(--text-color);
+
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
 }
 </style>

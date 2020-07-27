@@ -1,5 +1,10 @@
 <template>
-  <div :style="cssProps" v-if="enabled" class="announcement-bar">
+  <div
+    data-testid="announcement-bar"
+    :style="cssProps"
+    v-if="enabled"
+    class="announcement-bar"
+  >
     <span>
       {{ slides[this.currentSlide].text }}
     </span>

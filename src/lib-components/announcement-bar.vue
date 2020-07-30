@@ -3,7 +3,6 @@
     role="banner"
     data-testid="announcement-bar"
     :style="cssProps"
-    v-if="enabled"
     class="announcement-bar"
   >
     <a
@@ -19,7 +18,7 @@
   </div>
 </template>
 
-<script lang="">
+<script>
 export default {
   name: 'AnnouncementBar',
   data() {
@@ -28,12 +27,6 @@ export default {
     }
   },
   props: {
-    enabled: {
-      type: Boolean,
-      default: () => {
-        return false
-      }
-    },
     textColor: {
       type: String,
       // TODO validate hex color
@@ -68,9 +61,9 @@ export default {
   methods: {
     init() {
       setInterval(() => {
-        this.currentSlide === this.slides.length + 1
+        this.currentSlide === this.slides.length - 1
           ? (this.currentSlide = 0)
-          : (this.currentSlide += 1)
+          : (this.currentSlide = this.currentSlide + 1)
       }, this.speed)
     }
   },

@@ -1,0 +1,111 @@
+<template>
+  <div
+    :class="[`cart-tray`, trayOpen ? `active` : `inactive`, `side-${side}`]"
+    :style="cssProps"
+  >
+    <div class="cart-tray__top-banner">
+      <div class="cart-tray__counter">
+        {{ cartItems.length }}
+      </div>
+      <div aria-label="Close cart" tabindex="0" class="-pointer">
+        <i class="icon icon--med"
+          ><svg
+            width="21"
+            height="21"
+            viewBox="0 0 21 21"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.5,10.5 L1.5,1.5 L10.5,10.5 L1.5,19.5 L10.5,10.5 Z M10.5,10.5 L19.2675974,19.2675974 L10.5,10.5 L19.2675974,1.73240256 L10.5,10.5 Z"
+              stroke="#333"
+              fill="none"
+              fill-rule="evenodd"
+              stroke-linecap="square"
+            ></path></svg
+        ></i>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="">
+export default {
+  name: `CartTray`,
+  props: {
+    trayOpen: {
+      type: Boolean,
+      default: () => {
+        return false
+      }
+    },
+    maxWidth: {
+      type: Number,
+      default: () => {
+        return 600
+      }
+    },
+    textColor: {
+      type: String,
+      // TODO validate hex color
+      default: () => {
+        return '#000000'
+      }
+    },
+    backgroundColor: {
+      // TODO validate hex color
+      type: String,
+      default: () => {
+        return '#FFFFFF'
+      }
+    },
+    side: {
+      type: String,
+      validator: function(value) {
+        return [`left`, `right`].indexOf(value) !== -1
+      },
+      default: () => {
+        return `right`
+      }
+    },
+    cartItems: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
+  computed: {
+    cssProps() {
+      return {
+        '--cart-text-color': this.textColor,
+        '--cart-background-color': this.backgroundColor,
+        '--cart-max-width': `${this.maxWidth}px`
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.cart-tray {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: var(--cart-max-width);
+  background: var(--cart-background-color);
+  color: var(--cart-text-color);
+  box-sizing: border-box;
+
+  &.side-left {
+    right: auto;
+    left: 0;
+  }
+
+  .cart-tray__top-banner {
+    display: flex;
+    align-items: center;
+  }
+}
+</style>

@@ -87,6 +87,8 @@ export default {
 
 <style lang="scss" scoped>
 .announcement-bar {
+  display: flex;
+  justify-content: center;
   background: var(--background-color);
   color: var(--text-color);
 

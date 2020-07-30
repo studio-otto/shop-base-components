@@ -1,12 +1,10 @@
 <script>
 import Vue from 'vue'
-import { ShopBaseComponentsSample } from '@/entry'
 import { AnnouncementBar } from '@/entry'
 
 export default Vue.extend({
   name: 'ServeDev',
   components: {
-    ShopBaseComponentsSample,
     AnnouncementBar
   }
 })
@@ -14,11 +12,13 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <shop-base-components-sample />
     <announcement-bar
       :enabled="true"
       backgroundColor="#220e89"
-      :slides="[{ url: `https://google.com`, text: 'Hello world' }]"
+      :slides="[
+        { url: `https://google.com`, text: 'Hello world' },
+        { text: 'Lorem ipsum dolor sit amet' }
+      ]"
       textColor="#FFF"
     />
   </div>

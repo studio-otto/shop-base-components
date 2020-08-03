@@ -7,13 +7,24 @@ export default Vue.extend({
   components: {
     AnnouncementBar,
     CartTray
+  },
+  data() {
+    return {
+      cartOpen: false
+    }
+  },
+  methods: {
+    toggleCart() {
+      this.cartOpen = !this.cartOpen
+    }
   }
 })
 </script>
 
 <template>
   <div id="app">
-    <cart-tray :trayOpen="true" />
+    <button @click="toggleCart">Toggle cart tray</button>
+    <cart-tray :open="cartOpen" side="left" @onClose="toggleCart" />
     <announcement-bar
       backgroundColor="#220e89"
       :slides="[

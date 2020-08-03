@@ -1,13 +1,13 @@
 <template>
   <div
-    :class="[`cart-tray`, trayOpen ? `active` : `inactive`, `side-${side}`]"
+    :class="[`cart-tray`, open ? `active` : `inactive`, `side-${side}`]"
     :style="cssProps"
   >
     <div class="cart-tray__top-banner">
       <div class="cart-tray__counter">
         {{ cartItems.length }}
       </div>
-      <div aria-label="Close cart" tabindex="0" class="-pointer">
+      <div @click="close" aria-label="Close cart" tabindex="0" class="-pointer">
         <i class="icon icon--med"
           ><svg
             width="21"
@@ -32,7 +32,7 @@
 export default {
   name: `CartTray`,
   props: {
-    trayOpen: {
+    open: {
       type: Boolean,
       default: () => {
         return false
@@ -82,6 +82,11 @@ export default {
         '--cart-max-width': `${this.maxWidth}px`
       }
     }
+  },
+  methods: {
+    close() {
+      this.$emit('onClose')
+    }
   }
 }
 </script>
@@ -97,10 +102,17 @@ export default {
   background: var(--cart-background-color);
   color: var(--cart-text-color);
   box-sizing: border-box;
+  transition: 0.2s all ease-in-out;
+  transform: translateX(100%);
 
   &.side-left {
     right: auto;
     left: 0;
+    transform: translateX(-100%);
+  }
+
+  &.active {
+    transform: translateX(0);
   }
 
   .cart-tray__top-banner {

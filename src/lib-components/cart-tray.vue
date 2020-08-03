@@ -1,5 +1,6 @@
 <template>
   <div
+    data-testid="cart-tray"
     :class="[`cart-tray`, open ? `active` : `inactive`, `side-${side}`]"
     :style="cssProps"
   >
@@ -7,7 +8,13 @@
       <div class="cart-tray__counter">
         {{ cartItems.length }}
       </div>
-      <div @click="close" aria-label="Close cart" tabindex="0" class="-pointer">
+      <div
+        data-testid="close-button"
+        @click="close"
+        aria-label="Close cart"
+        tabindex="0"
+        class="-pointer"
+      >
         <i class="icon icon--med"
           ><svg
             width="21"

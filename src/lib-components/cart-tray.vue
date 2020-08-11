@@ -13,7 +13,7 @@
         @click="close"
         aria-label="Close cart"
         tabindex="0"
-        class="-pointer"
+        class="close-button"
       >
         <i class="icon icon--med"
           ><svg
@@ -120,6 +120,10 @@ export default {
 
   &.active {
     transform: translateX(0);
+  }
+
+  .close-button {
+    cursor: pointer;
   }
 
   .cart-tray__top-banner {

@@ -1,12 +1,14 @@
 <script>
 import Vue from 'vue'
-import { AnnouncementBar, CartTray } from '@/entry'
+import 'lazysizes'
+import { AnnouncementBar, CartTray, CollectionProductCard } from '@/entry'
 
 export default Vue.extend({
   name: 'ServeDev',
   components: {
     AnnouncementBar,
-    CartTray
+    CartTray,
+    CollectionProductCard
   },
   data() {
     return {
@@ -32,6 +34,31 @@ export default Vue.extend({
         { url: `https://apple.com`, text: 'Lorem ipsum dolor sit amet' }
       ]"
       textColor="#FFF"
+    />
+    <collection-product-card
+      :price="79.99"
+      :title="'Test Product'"
+      :compareAtPrice="49.99"
+      :images="[
+        {
+          id: 12313,
+          product_id: 21313,
+          position: 1,
+          src:
+            'https://cdn.shopify.com/s/files/1/1231/1148/products/HM.jpg?v=1575652110',
+          width: 1535,
+          height: 2291
+        },
+        {
+          id: 12313,
+          product_id: 21313,
+          position: 1,
+          src:
+            'https://cdn.shopify.com/s/files/1/1231/1148/products/Miaou-Brown-Leopard-Lex-Jacket-Junior-Jeans-BFCM-1_fa7d4f2d-3823-4d4a-bf2a-a23f2e3bad60.jpg?v=1582062817',
+          width: 1535,
+          height: 2291
+        }
+      ]"
     />
   </div>
 </template>

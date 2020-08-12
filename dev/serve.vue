@@ -1,23 +1,33 @@
 <script>
 import Vue from 'vue'
 import 'lazysizes'
-import { AnnouncementBar, CartTray, CollectionProductCard } from '@/entry'
+import {
+  AnnouncementBar,
+  CartTray,
+  CollectionProductCard,
+  Modal
+} from '@/entry'
 
 export default Vue.extend({
   name: 'ServeDev',
   components: {
     AnnouncementBar,
     CartTray,
-    CollectionProductCard
+    CollectionProductCard,
+    Modal
   },
   data() {
     return {
-      cartOpen: false
+      cartOpen: false,
+      modalOpen: false
     }
   },
   methods: {
     toggleCart() {
       this.cartOpen = !this.cartOpen
+    },
+    toggleModal() {
+      this.modalOpen = !this.modalOpen
     }
   }
 })
@@ -26,7 +36,15 @@ export default Vue.extend({
 <template>
   <div id="app">
     <button @click="toggleCart">Toggle cart tray</button>
+    <button @click="toggleModal">Toggle modal</button>
     <cart-tray :open="cartOpen" side="left" @onClose="toggleCart" />
+    <modal :open="modalOpen" @close="modalOpen = false" title="Lorem Ipsum">
+      <p>
+        Sed in leo finibus, ultrices risus sed, auctor ante. Fusce diam ex,
+        eleifend nec orci in, convallis lobortis ligula. Suspendisse eget
+        euismod turpis
+      </p>
+    </modal>
     <announcement-bar
       backgroundColor="#220e89"
       :slides="[

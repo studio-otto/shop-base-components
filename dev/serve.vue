@@ -5,7 +5,8 @@ import {
   AnnouncementBar,
   CartTray,
   CollectionProductCard,
-  Modal
+  Modal,
+  CookieConsent
 } from '@/entry'
 
 export default Vue.extend({
@@ -14,7 +15,8 @@ export default Vue.extend({
     AnnouncementBar,
     CartTray,
     CollectionProductCard,
-    Modal
+    Modal,
+    CookieConsent
   },
   data() {
     return {
@@ -45,6 +47,7 @@ export default Vue.extend({
         euismod turpis
       </p>
     </modal>
+    <cookie-consent />
     <announcement-bar
       backgroundColor="#220e89"
       :slides="[

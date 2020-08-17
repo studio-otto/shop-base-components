@@ -1,6 +1,6 @@
 {
   "name": "@studio-otto/shop-base-components",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "dist/shop-base-components.ssr.js",
   "browser": "dist/shop-base-components.esm.js",

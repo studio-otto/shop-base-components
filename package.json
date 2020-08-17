@@ -23,9 +23,8 @@
   },
   "dependencies": {
     "lazysizes": "^5.2.2",
-    "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
-    "vue-cookies": "^1.7.3"
+    "vue-cookies": "^1.7.3",
+    "vue-glide": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -47,6 +46,8 @@
     "rollup-plugin-scss": "^2.6.0",
     "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-vue": "^6.0.0-beta.10",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
     "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   },

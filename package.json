@@ -23,8 +23,7 @@
   },
   "dependencies": {
     "lazysizes": "^5.2.2",
-    "vue-cookies": "^1.7.3",
-    "vue-glide": "^0.4.0"
+    "vue-cookies": "^1.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -1,6 +1,7 @@
 <template>
   <!-- <div :id="'ImageWrapper-' + this._uid" :data-image-id='this._uid' :class='["responsive-image__wrapper", classNames]'> -->
   <img
+    data-testid="responsive-image"
     data-src="image3.jpg"
     :data-srcset="lazySrc"
     data-sizes="auto"

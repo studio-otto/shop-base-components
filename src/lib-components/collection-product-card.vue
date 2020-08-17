@@ -16,7 +16,7 @@
         <span v-if="isSaleItem" class="cpc__details-sale-price">
           ${{ compareAtPrice }}
         </span>
-        <span class="cpc__details-sale-price"> ${{ price }} </span>
+        <span class="cpc__details-price"> ${{ price }} </span>
       </div>
     </div>
   </div>

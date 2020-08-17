@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="cpc">
+  <div class="cpc" data-testid="cpc">
     <div class="cpc__image">
       <responsive-image
         v-if="images.length > 0"

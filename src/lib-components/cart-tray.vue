@@ -32,6 +32,15 @@
         ></i>
       </div>
     </div>
+    <div v-if="banner" class="cart-tray__banner">
+      {{ banner }}
+    </div>
+    <div v-if="cartItems.length === 0" class="cart-tray__empty-message">
+      {{ emptyMessage }}
+    </div>
+    <div class="cart-tray__bottom">
+      <button>Checkout</button>
+    </div>
   </div>
 </template>
 
@@ -78,6 +87,18 @@ export default {
       type: Array,
       default: () => {
         return []
+      }
+    },
+    emptyMessage: {
+      type: String,
+      default: () => {
+        return `Your cart is empty.`
+      }
+    },
+    banner: {
+      type: String,
+      default: () => {
+        return `Hello Otto`
       }
     }
   },

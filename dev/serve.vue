@@ -1,16 +1,16 @@
 <script>
-import Vue from 'vue'
-import 'lazysizes'
+import Vue from "vue";
+import "lazysizes";
 import {
   AnnouncementBar,
   CartTray,
   CollectionProductCard,
   Modal,
   CookieConsent
-} from '@/entry'
+} from "@/entry";
 
 export default Vue.extend({
-  name: 'ServeDev',
+  name: "ServeDev",
   components: {
     AnnouncementBar,
     CartTray,
@@ -22,17 +22,17 @@ export default Vue.extend({
     return {
       cartOpen: false,
       modalOpen: false
-    }
+    };
   },
   methods: {
     toggleCart() {
-      this.cartOpen = !this.cartOpen
+      this.cartOpen = !this.cartOpen;
     },
     toggleModal() {
-      this.modalOpen = !this.modalOpen
+      this.modalOpen = !this.modalOpen;
     }
   }
-})
+});
 </script>
 
 <template>
@@ -64,7 +64,7 @@ export default Vue.extend({
         {
           id: 12313,
           product_id: 21313,
-          position: 1,
+          position: 0,
           src:
             'https://cdn.shopify.com/s/files/1/1231/1148/products/HM.jpg?v=1575652110',
           width: 1535,
@@ -83,3 +83,9 @@ export default Vue.extend({
     />
   </div>
 </template>
+
+<style>
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

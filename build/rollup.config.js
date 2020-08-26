@@ -9,6 +9,7 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import minimist from 'minimist'
 import scss from 'rollup-plugin-scss'
+import resolve from '@rollup/plugin-node-resolve'
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs
@@ -94,6 +95,7 @@ if (!argv.format || argv.format === 'es') {
           ]
         ]
       }),
+      resolve(),
       commonjs(),
       scss()
     ]
@@ -124,6 +126,7 @@ if (!argv.format || argv.format === 'cjs') {
         }
       }),
       babel(baseConfig.plugins.babel),
+      resolve(),
       commonjs(),
       scss()
     ]
@@ -148,9 +151,9 @@ if (!argv.format || argv.format === 'iife') {
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
       babel(baseConfig.plugins.babel),
+      resolve(),
       commonjs(),
       scss(),
-
       terser({
         output: {
           ecma: 5

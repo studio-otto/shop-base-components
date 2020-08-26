@@ -1,16 +1,27 @@
 <template lang="">
   <div class="cpc" data-testid="cpc">
     <div
-      v-if="images.length > 0"
       class="cpc__image"
-      @mouseover="toggleHover"
-      @mouseleave="toggleHover"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
-      <responsive-image
-        :lazySrcSet="displayImage"
-        :altText="title + 'image'"
-        :isFeatured="!!isUsingFeatured"
-      />
+      <transition name="fade">
+        <responsive-image
+          v-if="!isHovered"
+          :lazySrcSet="displayImage"
+          :altText="`${title} image`"
+          :isFeatured="!!isUsingFeatured"
+        />
+        <vue-glide v-else :perView="1" :startAt="1">
+          <vue-glide-slide v-for="(image, index) in images" :key="index">
+            <responsive-image
+              :lazySrcSet="image.src"
+              :altText="`${title} image`"
+              :isFeatured="!!isUsingFeatured"
+            />
+          </vue-glide-slide>
+        </vue-glide>
+      </transition>
     </div>
     <div class="cpc__details">
       <div class="cpc__details-title">
@@ -28,11 +39,16 @@
 
 <script lang="">
 import ResponsiveImage from './responsive-image.vue'
+import { Glide, GlideSlide } from 'vue-glide-js'
+// May need to remove this to make fade transition?
+import 'vue-glide-js/dist/vue-glide.css'
 
 export default {
   name: `CollectionProductCard`,
   components: {
-    ResponsiveImage
+    ResponsiveImage,
+    [Glide.name]: Glide,
+    [GlideSlide.name]: GlideSlide
   },
   data() {
     return {
@@ -134,3 +150,22 @@ export default {
   // functional: false
 }
 </script>
+
+<style lang="scss">
+.cpc {
+  ul {
+    margin: 0;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+  position: absolute;
+}
+</style>

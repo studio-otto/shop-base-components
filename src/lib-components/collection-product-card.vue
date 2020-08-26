@@ -1,8 +1,12 @@
 <template lang="">
   <div class="cpc" data-testid="cpc">
-    <div class="cpc__image">
+    <div
+      v-if="images.length > 0"
+      class="cpc__image"
+      @mouseover="toggleHover"
+      @mouseleave="toggleHover"
+    >
       <responsive-image
-        v-if="images.length > 0"
         :lazySrcSet="displayImage"
         :altText="title + 'image'"
         :isFeatured="!!isUsingFeatured"

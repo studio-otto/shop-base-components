@@ -24,8 +24,7 @@ export default Vue.extend({
       modalOpen: false,
       product: {
         title: 'Test Product',
-        price: '79.99',
-        compareAtPrice: '49.99',
+        variants: [{ compareAtPrice: null, price: '245.00' }],
         images: [
           {
             id: 12313,

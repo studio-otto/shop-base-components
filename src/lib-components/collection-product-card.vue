@@ -34,7 +34,9 @@
         <span v-if="isSaleItem" class="cpc__details-sale-price">
           ${{ product.compareAtPrice }}
         </span>
-        <span class="cpc__details-price"> ${{ product.price }} </span>
+        <span class="cpc__details-price">
+          ${{ product.price ? product.price : product.variants[0].price }}
+        </span>
       </div>
     </div>
   </div>
@@ -80,10 +82,11 @@ export default {
   },
   computed: {
     isSaleItem() {
-      return (
-        this.product.compareAtPrice &&
-        this.product.compareAtPrice < this.product.price
-      )
+      return this.product.compareAtPrice
+        ? this.product.compareAtPrice < this.product.price
+        : this.product.variants[0].compareAtPrice &&
+            this.product.variants[0].compareAtPrice <
+              this.product.variants[0].price
     },
     displayImage() {
       if (this.featuredImage && this.isUsingFeatured) {

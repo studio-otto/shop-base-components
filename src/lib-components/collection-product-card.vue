@@ -9,7 +9,7 @@
         <responsive-image
           v-if="!isHovered"
           :lazySrcSet="displayImage"
-          :altText="`${title} image`"
+          :altText="`${product.title} image`"
           :isFeatured="!!isUsingFeatured"
         />
         <vue-glide v-else :perView="1" :startAt="1">
@@ -19,7 +19,7 @@
           >
             <responsive-image
               :lazySrcSet="image.src"
-              :altText="`${title} image`"
+              :altText="`${product.title} image`"
               :isFeatured="!!isUsingFeatured"
             />
           </vue-glide-slide>

@@ -9,14 +9,17 @@
         <responsive-image
           v-if="!isHovered"
           :lazySrcSet="displayImage"
-          :altText="`${title} image`"
+          :altText="`${product.title} image`"
           :isFeatured="!!isUsingFeatured"
         />
         <vue-glide v-else :perView="1" :startAt="1">
-          <vue-glide-slide v-for="(image, index) in images" :key="index">
+          <vue-glide-slide
+            v-for="(image, index) in product.images"
+            :key="index"
+          >
             <responsive-image
               :lazySrcSet="image.src"
-              :altText="`${title} image`"
+              :altText="`${product.title} image`"
               :isFeatured="!!isUsingFeatured"
             />
           </vue-glide-slide>
@@ -25,23 +28,25 @@
     </div>
     <div class="cpc__details">
       <div class="cpc__details-title">
-        {{ title }}
+        {{ product.title }}
       </div>
       <div class="cpc__details-price">
         <span v-if="isSaleItem" class="cpc__details-sale-price">
-          ${{ compareAtPrice }}
+          ${{ product.compareAtPrice }}
         </span>
-        <span class="cpc__details-price"> ${{ price }} </span>
+        <span class="cpc__details-price">
+          ${{ product.price ? product.price : product.variants[0].price }}
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="">
-import ResponsiveImage from "./responsive-image.vue";
-import { Glide, GlideSlide } from "vue-glide-js";
+import ResponsiveImage from './responsive-image.vue'
+import { Glide, GlideSlide } from 'vue-glide-js'
 // May need to remove this to make fade transition?
-import "vue-glide-js/dist/vue-glide.css";
+import 'vue-glide-js/dist/vue-glide.css'
 
 export default {
   name: `CollectionProductCard`,
@@ -53,67 +58,53 @@ export default {
   data() {
     return {
       isHovered: false
-    };
+    }
   },
   props: {
-    title: {
-      type: String,
+    product: {
+      type: Object,
       default: () => {
-        return ``;
-      }
-    },
-    price: {
-      type: Number,
-      default: () => {
-        return 0;
+        return {}
       }
     },
     isUsingFeatured: {
       type: Boolean,
       default: () => {
-        return false;
+        return false
       }
     },
     featuredImage: {
       type: Object,
       default: () => {
-        return null;
-      }
-    },
-    compareAtPrice: {
-      type: Number,
-      default: () => {
-        return null;
-      }
-    },
-    images: {
-      type: Array,
-      default: () => {
-        return [];
+        return null
       }
     }
   },
   computed: {
     isSaleItem() {
-      return this.compareAtPrice && this.compareAtPrice < this.price;
+      return this.product.compareAtPrice
+        ? this.product.compareAtPrice < this.product.price
+        : this.product.variants[0].compareAtPrice &&
+            this.product.variants[0].compareAtPrice <
+              this.product.variants[0].price
     },
     displayImage() {
       if (this.featuredImage && this.isUsingFeatured) {
-        return this.featuredImage;
+        return this.featuredImage
       } else {
         return this.isUsingStorefront
-          ? this.images
-            ? this.images[0]
-            : ""
-          : this.images
-          ? this.images[0].src
-          : "";
+          ? this.product.images
+            ? this.product.images[0]
+            : ''
+          : this.product.images
+          ? this.product.images[0].src
+          : ''
       }
     }
   },
   methods: {
     toggleHover() {
-      this.isHovered = !this.isHovered;
+      this.isHovered = !this.isHovered
     }
   }
   // data () { return {} },
@@ -148,7 +139,7 @@ export default {
   // extends: {},
   // delimiters: [ '{{', '}}' ],
   // functional: false
-};
+}
 </script>
 
 <style lang="scss">

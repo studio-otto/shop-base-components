@@ -7,7 +7,7 @@
     >
       <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
       <responsive-image
-        v-if="usesHover ? !isHovered : true"
+        v-if="(usesHover && !isHovered) || !usesHover"
         :lazySrcSet="displayImage"
         :altText="`${product.title} image`"
         :isFeatured="!!isUsingFeatured"

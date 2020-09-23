@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="cpc__slider-wrapper">
     <span @click="prevSlide">Prev</span>
     <span @click="nextSlide">Next</span>

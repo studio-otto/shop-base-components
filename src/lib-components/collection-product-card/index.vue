@@ -6,12 +6,14 @@
       @mouseleave="isHovered = false"
     >
       <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
-      <responsive-image
-        v-if="(usesHover && !isHovered) || !usesHover"
-        :lazySrcSet="displayImage"
-        :altText="`${product.title} image`"
-        :isFeatured="!!isUsingFeatured"
-      />
+      <router-link :to="url">
+        <responsive-image
+          v-if="(usesHover && !isHovered) || !usesHover"
+          :lazySrcSet="displayImage"
+          :altText="`${product.title} image`"
+          :isFeatured="!!isUsingFeatured"
+        />
+      </router-link>
       <Slider v-if="usesHover && isHovered" :images="sliderImages" />
     </div>
     <div class="cpc__details">
@@ -49,6 +51,12 @@ export default {
       type: Object,
       default: () => {
         return {};
+      }
+    },
+    url: {
+      type: String,
+      default: () => {
+        return "";
       }
     },
     isUsingFeatured: {

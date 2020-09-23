@@ -6,7 +6,7 @@
   >
     <div class="cart-tray__top-banner">
       <div class="cart-tray__counter">
-        {{ cartItems.length }}
+        {{ checkout.lineItems && checkout.lineItems.length }}
       </div>
       <div
         data-testid="close-button"
@@ -35,8 +35,18 @@
     <div v-if="banner" class="cart-tray__banner">
       {{ banner }}
     </div>
-    <div v-if="cartItems.length === 0" class="cart-tray__empty-message">
+    <div
+      v-if="checkout.lineItems && checkout.lineItems.length === 0"
+      class="cart-tray__empty-message"
+    >
       {{ emptyMessage }}
+    </div>
+    <div
+      v-else
+      v-for="(lineItem, index) in checkout.lineItems"
+      :key="lineItem.id"
+    >
+      <LineItem :lineItem="lineItem" />
     </div>
     <div class="cart-tray__bottom">
       <button>Checkout</button>
@@ -45,78 +55,83 @@
 </template>
 
 <script lang="">
+import LineItem from "./line-item.vue";
+
 export default {
   name: `CartTray`,
+  components: {
+    LineItem
+  },
   props: {
     open: {
       type: Boolean,
       default: () => {
-        return false
+        return false;
       }
     },
     maxWidth: {
       type: Number,
       default: () => {
-        return 600
+        return 600;
       }
     },
     textColor: {
       type: String,
       // TODO validate hex color
       default: () => {
-        return '#000000'
+        return "#000000";
       }
     },
     backgroundColor: {
       // TODO validate hex color
       type: String,
       default: () => {
-        return '#FFFFFF'
+        return "#FFFFFF";
       }
     },
     side: {
       type: String,
       validator: function(value) {
-        return [`left`, `right`].indexOf(value) !== -1
+        return [`left`, `right`].indexOf(value) !== -1;
       },
       default: () => {
-        return `right`
+        return `right`;
       }
     },
-    cartItems: {
-      type: Array,
+    checkout: {
+      type: Object,
       default: () => {
-        return []
+        return {};
       }
     },
     emptyMessage: {
       type: String,
       default: () => {
-        return `Your cart is empty.`
+        return `Your cart is empty.`;
       }
     },
     banner: {
       type: String,
       default: () => {
-        return `Hello Otto`
+        return `Hello Otto`;
       }
     }
   },
   computed: {
     cssProps() {
       return {
-        '--cart-text-color': this.textColor,
-        '--cart-background-color': this.backgroundColor,
-        '--cart-max-width': `${this.maxWidth}px`
-      }
+        "--cart-text-color": this.textColor,
+        "--cart-background-color": this.backgroundColor,
+        "--cart-max-width": `${this.maxWidth}px`
+      };
     }
   },
   methods: {
     close() {
-      this.$emit('onClose')
+      this.$emit("onClose");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

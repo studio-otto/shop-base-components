@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     removeLineItem(id) {
-      this.$emit("onRemove", id);
+      this.$emit("removeLineItem", id);
     },
     updateAttributes() {
       this.$emit("onUpdateAttributes");

@@ -1,41 +1,41 @@
 // rollup.config.js
-import fs from 'fs'
-import path from 'path'
-import vue from 'rollup-plugin-vue'
-import alias from '@rollup/plugin-alias'
-import commonjs from '@rollup/plugin-commonjs'
-import replace from '@rollup/plugin-replace'
-import babel from 'rollup-plugin-babel'
-import { terser } from 'rollup-plugin-terser'
-import minimist from 'minimist'
-import scss from 'rollup-plugin-scss'
-import resolve from '@rollup/plugin-node-resolve'
+import fs from "fs";
+import path from "path";
+import vue from "rollup-plugin-vue";
+import alias from "@rollup/plugin-alias";
+import commonjs from "@rollup/plugin-commonjs";
+import replace from "@rollup/plugin-replace";
+import babel from "rollup-plugin-babel";
+import { terser } from "rollup-plugin-terser";
+import minimist from "minimist";
+import scss from "rollup-plugin-scss";
+import resolve from "@rollup/plugin-node-resolve";
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs
-  .readFileSync('./.browserslistrc')
+  .readFileSync("./.browserslistrc")
   .toString()
-  .split('\n')
-  .filter((entry) => entry && entry.substring(0, 2) !== 'ie')
+  .split("\n")
+  .filter(entry => entry && entry.substring(0, 2) !== "ie");
 
-const argv = minimist(process.argv.slice(2))
+const argv = minimist(process.argv.slice(2));
 
-const projectRoot = path.resolve(__dirname, '..')
+const projectRoot = path.resolve(__dirname, "..");
 
 const baseConfig = {
-  input: 'src/entry.js',
+  input: "src/entry.js",
   plugins: {
     preVue: [
       alias({
-        resolve: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+        resolve: [".js", ".jsx", ".ts", ".tsx", ".vue"],
         entries: {
-          '@': path.resolve(projectRoot, 'src')
+          "@": path.resolve(projectRoot, "src")
         }
       })
     ],
     replace: {
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      'process.env.ES_BUILD': JSON.stringify('false')
+      "process.env.NODE_ENV": JSON.stringify("production"),
+      "process.env.ES_BUILD": JSON.stringify("false")
     },
     vue: {
       css: true,
@@ -44,43 +44,44 @@ const baseConfig = {
       }
     },
     babel: {
-      exclude: 'node_modules/**',
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue']
+      exclude: "node_modules/**",
+      extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"]
     }
   }
-}
+};
 
 // ESM/UMD/IIFE shared settings: externals
 // Refer to https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency
 const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
-  'vue'
-]
+  "vue"
+];
 
 // UMD/IIFE shared settings: output.globals
 // Refer to https://rollupjs.org/guide/en#output-globals for details
 const globals = {
   // Provide global variable names to replace your external imports
   // eg. jquery: '$'
-  vue: 'Vue'
-}
+  vue: "Vue"
+};
 
 // Customize configs for individual targets
-const buildFormats = []
-if (!argv.format || argv.format === 'es') {
+const buildFormats = [];
+if (!argv.format || argv.format === "es") {
   const esConfig = {
     ...baseConfig,
     external,
     output: {
-      file: 'dist/shop-base-components.esm.js',
-      format: 'esm',
-      exports: 'named'
+      file: "dist/shop-base-components.esm.js",
+      inlineDynamicImports: true,
+      format: "esm",
+      exports: "named"
     },
     plugins: [
       replace({
         ...baseConfig.plugins.replace,
-        'process.env.ES_BUILD': JSON.stringify('true')
+        "process.env.ES_BUILD": JSON.stringify("true")
       }),
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
@@ -88,7 +89,7 @@ if (!argv.format || argv.format === 'es') {
         ...baseConfig.plugins.babel,
         presets: [
           [
-            '@babel/preset-env',
+            "@babel/preset-env",
             {
               targets: esbrowserslist
             }
@@ -99,20 +100,21 @@ if (!argv.format || argv.format === 'es') {
       commonjs(),
       scss()
     ]
-  }
-  buildFormats.push(esConfig)
+  };
+  buildFormats.push(esConfig);
 }
 
-if (!argv.format || argv.format === 'cjs') {
+if (!argv.format || argv.format === "cjs") {
   const umdConfig = {
     ...baseConfig,
     external,
     output: {
       compact: true,
-      file: 'dist/shop-base-components.ssr.js',
-      format: 'cjs',
-      name: 'ShopBaseComponents',
-      exports: 'named',
+      inlineDynamicImports: true,
+      file: "dist/shop-base-components.ssr.js",
+      format: "cjs",
+      name: "ShopBaseComponents",
+      exports: "named",
       globals
     },
     plugins: [
@@ -130,20 +132,21 @@ if (!argv.format || argv.format === 'cjs') {
       commonjs(),
       scss()
     ]
-  }
-  buildFormats.push(umdConfig)
+  };
+  buildFormats.push(umdConfig);
 }
 
-if (!argv.format || argv.format === 'iife') {
+if (!argv.format || argv.format === "iife") {
   const unpkgConfig = {
     ...baseConfig,
     external,
     output: {
       compact: true,
-      file: 'dist/shop-base-components.min.js',
-      format: 'iife',
-      name: 'ShopBaseComponents',
-      exports: 'named',
+      file: "dist/shop-base-components.min.js",
+      format: "iife",
+      name: "ShopBaseComponents",
+      inlineDynamicImports: true,
+      exports: "named",
       globals
     },
     plugins: [
@@ -160,9 +163,9 @@ if (!argv.format || argv.format === 'iife') {
         }
       })
     ]
-  }
-  buildFormats.push(unpkgConfig)
+  };
+  buildFormats.push(unpkgConfig);
 }
 
 // Export config
-export default buildFormats
+export default buildFormats;

@@ -10,6 +10,7 @@ import { terser } from "rollup-plugin-terser";
 import minimist from "minimist";
 import scss from "rollup-plugin-scss";
 import resolve from "@rollup/plugin-node-resolve";
+import json from "@rollup/plugin-json";
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs
@@ -98,7 +99,8 @@ if (!argv.format || argv.format === "es") {
       }),
       resolve(),
       commonjs(),
-      scss()
+      scss(),
+      json()
     ]
   };
   buildFormats.push(esConfig);
@@ -130,7 +132,8 @@ if (!argv.format || argv.format === "cjs") {
       babel(baseConfig.plugins.babel),
       resolve(),
       commonjs(),
-      scss()
+      scss(),
+      json()
     ]
   };
   buildFormats.push(umdConfig);
@@ -157,6 +160,7 @@ if (!argv.format || argv.format === "iife") {
       resolve(),
       commonjs(),
       scss(),
+      json(),
       terser({
         output: {
           ecma: 5

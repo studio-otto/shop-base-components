@@ -87,7 +87,7 @@ export default Vue.extend({
           {
             id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMjAzMjgxOTY0MjQ3Mw==",
             available: true,
-            compareAtPrice: null,
+            compareAtPrice: "325.00",
             price: "245.00",
             title: "ANF / XS",
             selectedOptions: [{ value: "ANF" }, { value: "XS" }]

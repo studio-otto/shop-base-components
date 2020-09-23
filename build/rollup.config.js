@@ -97,7 +97,7 @@ if (!argv.format || argv.format === "es") {
           ]
         ]
       }),
-      resolve(),
+      resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
       scss(),
       json()
@@ -130,7 +130,7 @@ if (!argv.format || argv.format === "cjs") {
         }
       }),
       babel(baseConfig.plugins.babel),
-      resolve(),
+      resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
       scss(),
       json()
@@ -157,7 +157,7 @@ if (!argv.format || argv.format === "iife") {
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
       babel(baseConfig.plugins.babel),
-      resolve(),
+      resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
       scss(),
       json(),

@@ -8,6 +8,7 @@ import {
   Modal,
   CookieConsent
 } from "@/entry";
+import checkout from "./dev-checkout";
 
 export default Vue.extend({
   name: "ServeDev",
@@ -20,6 +21,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      checkout: checkout,
       cartOpen: false,
       modalOpen: false,
       product: {
@@ -142,7 +144,12 @@ export default Vue.extend({
   <div id="app">
     <button @click="toggleCart">Toggle cart tray</button>
     <button @click="toggleModal">Toggle modal</button>
-    <cart-tray :open="cartOpen" side="left" @onClose="toggleCart" />
+    <cart-tray
+      :checkout="checkout"
+      :open="cartOpen"
+      side="left"
+      @onClose="toggleCart"
+    />
     <modal :open="modalOpen" @close="modalOpen = false" title="Lorem Ipsum">
       <p>
         Sed in leo finibus, ultrices risus sed, auctor ante. Fusce diam ex,
@@ -159,7 +166,10 @@ export default Vue.extend({
       ]"
       textColor="#FFF"
     />
-    <collection-product-card :product="product" usesHover />
+    <collection-product-card
+      :product="product"
+      :url="`/products/${product.handle}`"
+    />
   </div>
 </template>
 

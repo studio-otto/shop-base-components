@@ -81,9 +81,9 @@ export default {
   computed: {
     isSaleItem() {
       return this.product.compareAtPrice
-        ? this.product.compareAtPrice < this.product.price
+        ? this.product.compareAtPrice > this.product.price
         : this.product.variants[0].compareAtPrice &&
-            this.product.variants[0].compareAtPrice <
+            this.product.variants[0].compareAtPrice >
               this.product.variants[0].price;
     },
     sliderImages() {

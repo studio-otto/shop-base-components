@@ -4,6 +4,7 @@
     :class="[`cart-tray`, open ? `active` : `inactive`, `side-${side}`]"
     :style="cssProps"
   >
+    <button @click="removeItem">remove item</button>
     <div class="cart-tray__top-banner">
       <div class="cart-tray__counter">
         {{ checkout.lineItems && checkout.lineItems.length }}
@@ -46,7 +47,7 @@
       v-for="(lineItem, index) in checkout.lineItems"
       :key="lineItem.id"
     >
-      <LineItem :lineItem="lineItem" />
+      <LineItem :lineItem="lineItem" @onRemove="removeItem" />
     </div>
     <div class="cart-tray__bottom">
       <button>Checkout</button>
@@ -129,6 +130,9 @@ export default {
   methods: {
     close() {
       this.$emit("onClose");
+    },
+    removeItem(id) {
+      this.$emit("remove", id);
     }
   }
 };

@@ -6,7 +6,7 @@
       <span>{{ lineItem.quantity }}</span>
       <span @click="updateLineItem">+</span>
     </div>
-    <span @click="removeLineItem">Remove</span>
+    <span @click="removeLineItem(lineItem.id)">Remove</span>
   </div>
 </template>
 
@@ -31,8 +31,8 @@ export default {
     }
   },
   methods: {
-    removeLineItem() {
-      this.$emit("onRemove");
+    removeLineItem(id) {
+      this.$emit("onRemove", id);
     },
     updateAttributes() {
       this.$emit("onUpdateAttributes");

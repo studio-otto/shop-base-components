@@ -135,6 +135,9 @@ export default Vue.extend({
     },
     toggleModal() {
       this.modalOpen = !this.modalOpen;
+    },
+    removeCartItem(id) {
+      console.log(`removed line item: ${id}`);
     }
   }
 });
@@ -149,6 +152,7 @@ export default Vue.extend({
       :open="cartOpen"
       side="left"
       @onClose="toggleCart"
+      @remove="removeCartItem"
     />
     <modal :open="modalOpen" @close="modalOpen = false" title="Lorem Ipsum">
       <p>

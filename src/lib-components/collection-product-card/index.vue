@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="cpc" data-testid="cpc">
     <div
       class="cpc__image"
@@ -37,7 +37,7 @@ export default {
   name: `CollectionProductCard`,
   components: {
     ResponsiveImage,
-    Slider: () => import("./slider")
+    Slider: () => import("./slider.vue")
   },
   data() {
     return {

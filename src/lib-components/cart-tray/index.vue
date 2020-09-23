@@ -6,7 +6,7 @@
   >
     <div class="cart-tray__top-banner">
       <div class="cart-tray__counter">
-        {{ checkout.lineItems && checkout.lineItems.length }}
+        {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
       </div>
       <div
         data-testid="close-button"
@@ -36,13 +36,13 @@
       {{ banner }}
     </div>
     <div
-      v-if="checkout.lineItems && checkout.lineItems.length === 0"
+      v-if="checkout && checkout.lineItems && checkout.lineItems.length === 0"
       class="cart-tray__empty-message"
     >
       {{ emptyMessage }}
     </div>
     <div
-      v-else
+      v-else-if="checkout"
       v-for="(lineItem, index) in checkout.lineItems"
       :key="lineItem.id"
     >

@@ -46,7 +46,11 @@
       v-for="(lineItem, index) in checkout.lineItems"
       :key="lineItem.id"
     >
-      <LineItem :lineItem="lineItem" @removeLineItem="removeLineItem" />
+      <LineItem
+        :lineItem="lineItem"
+        @removeLineItem="removeLineItem"
+        @updateLineItem="updateLineItem"
+      />
     </div>
     <div class="cart-tray__bottom">
       <button>Checkout</button>
@@ -132,6 +136,9 @@ export default {
     },
     removeLineItem(id) {
       this.$emit("removeLineItem", id);
+    },
+    updateLineItem({ id, quantity }) {
+      this.$emit("updateLineItem", { id: id, quantity: quantity });
     }
   }
 };

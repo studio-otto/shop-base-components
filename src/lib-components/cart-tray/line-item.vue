@@ -2,9 +2,9 @@
   <div class="cart-tray__line-item">
     <ResponsiveImage :lazySrcSet="lineItemImage" :altText="lineItem.title" />
     <div class="cart-tray__line-item-counter">
-      <span @click="updateLineItem">-</span>
+      <span @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
       <span>{{ lineItem.quantity }}</span>
-      <span @click="updateLineItem">+</span>
+      <span @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
     </div>
     <span @click="removeLineItem(lineItem.id)">Remove</span>
   </div>
@@ -34,11 +34,8 @@ export default {
     removeLineItem(id) {
       this.$emit("removeLineItem", id);
     },
-    updateAttributes() {
-      this.$emit("onUpdateAttributes");
-    },
-    updateLineItem() {
-      this.$emit("onUpdate");
+    updateLineItem(id, quantity) {
+      this.$emit("updateLineItem", { id: id, quantity: quantity });
     }
   }
 };

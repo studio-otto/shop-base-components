@@ -160,6 +160,8 @@ export default {
   methods: {
     // Filtering definition Logic
     filterDefinition(product) {
+      if(!product.isLoaded) return true
+
       return this.availableFilters.every((filterType) => {
         switch (filterType) {
           case 'color':
@@ -222,15 +224,27 @@ export default {
 
     // Sorting definition Logic
     sortPriceHighToLow(p1, p2) {
-      return parseFloat(p2.variants[0].price) - parseFloat(p1.variants[0].price)
+      if(p1.isLoaded && p2.isLoaded) {
+        return parseFloat(p2.variants[0].price) - parseFloat(p1.variants[0].price)
+      } else {
+        return 0
+      }
     },
 
     sortPriceLowToHigh(p1, p2) {
-      return parseFloat(p1.variants[0].price) - parseFloat(p2.variants[0].price)
+      if(p1.isLoaded && p2.isLoaded) {
+        return parseFloat(p1.variants[0].price) - parseFloat(p2.variants[0].price)
+      } else {
+        return 0
+      }
     },
 
     sortByManual(p1, p2) {
-      return p1.manualSortWeight - p2.manualSortWeight
+      if(p1.isLoaded && p2.isLoaded) {
+        return p1.manualSortWeight - p2.manualSortWeight
+      } else {
+        return 0
+      }
     },
 
     // State update methods

@@ -1,48 +1,53 @@
 <template>
   <div class="cpc" data-testid="cpc">
-    <div
-      class="cpc__image"
-      @mouseover="isHovered = true"
-      @mouseleave="isHovered = false"
-    >
-      <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
-      <router-link :to="url">
-        <responsive-image
-          v-if="(usesHover && !isHovered) || !usesHover"
-          :lazySrcSet="displayImage"
-          :altText="`${product.title} image`"
-          :isFeatured="!!isUsingFeatured"
-        />
-      </router-link>
-      <Slider v-if="usesHover && isHovered" :images="sliderImages" />
-    </div>
-    <div class="cpc__details">
-      <div class="cpc__details-title">
-        {{ product.title }}
+    <div v-if="product && product.isLoaded">
+      <div
+        class="cpc__image"
+        @mouseover="isHovered = true"
+        @mouseleave="isHovered = false"
+      >
+        <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
+        <router-link :to="url">
+          <responsive-image
+            v-if="(usesHover && !isHovered) || !usesHover"
+            :lazySrcSet="displayImage"
+            :altText="`${product.title} image`"
+            :isFeatured="!!isUsingFeatured"
+          />
+        </router-link>
+        <Slider v-if="usesHover && isHovered" :images="sliderImages" />
       </div>
-      <div class="cpc__details-price">
-        <span v-if="isSaleItem" class="cpc__details-sale-price">
-          ${{
-            product.compareAtPrice
-              ? product.compareAtPrice
-              : product.variants[0].compareAtPrice
-          }}
-        </span>
-        <span class="cpc__details-price">
-          ${{ product.price ? product.price : product.variants[0].price }}
-        </span>
+      <div class="cpc__details">
+        <div class="cpc__details-title">
+          {{ product.title }}
+        </div>
+        <div class="cpc__details-price">
+          <span v-if="isSaleItem" class="cpc__details-sale-price">
+            ${{
+              product.compareAtPrice
+                ? product.compareAtPrice
+                : product.variants[0].compareAtPrice
+            }}
+          </span>
+          <span class="cpc__details-price">
+            ${{ product.price ? product.price : product.variants[0].price }}
+          </span>
+        </div>
       </div>
     </div>
+    <LoadingCard v-else :handle="product.handle" />
   </div>
 </template>
 
 <script lang="">
 import ResponsiveImage from "../responsive-image.vue";
+import LoadingCard from './loading-card.vue';
 
 export default {
   name: `CollectionProductCard`,
   components: {
     ResponsiveImage,
+    LoadingCard,
     Slider: () => import("./slider.vue")
   },
   data() {

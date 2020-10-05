@@ -1,19 +1,19 @@
 import { render, cleanup } from '@testing-library/vue'
 import '@testing-library/jest-dom/extend-expect'
-import ResponsiveImage from '../responsive-image.vue'
+import LazyImage from '../lazy-image.vue'
 
 afterEach(cleanup)
 
 test('renders', async () => {
-  const { getByTestId } = render(ResponsiveImage)
+  const { getByTestId } = render(LazyImage)
 
-  const image = getByTestId('responsive-image')
+  const image = getByTestId('lazy-image')
 
   expect(image).toBeInTheDocument()
 })
 
 test('renders alt text', async () => {
-  const { getByAltText } = render(ResponsiveImage, {
+  const { getByAltText } = render(LazyImage, {
     props: {
       altText: 'Hello Otto'
     }

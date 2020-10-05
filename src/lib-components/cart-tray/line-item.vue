@@ -1,6 +1,6 @@
 <template>
   <div class="cart-tray__line-item">
-    <ResponsiveImage :lazySrcSet="lineItemImage" :altText="lineItem.title" />
+    <LazyImage :alt-text="lineItem.title" :img-url="lineItemImage" />
     <div class="cart-tray__line-item-counter">
       <span @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
       <span>{{ lineItem.quantity }}</span>
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import ResponsiveImage from "../responsive-image.vue";
+import LazyImage from "../lazy-image.vue";
 export default {
   name: "LineItem",
   components: {
-    ResponsiveImage
+    LazyImage
   },
   props: {
     lineItem: {

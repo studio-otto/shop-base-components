@@ -6,21 +6,20 @@
       @mouseleave="isHovered = false"
     >
       <transition name="fade">
-        <responsive-image
+        <LazyImage
           v-if="!isHovered"
-          :lazySrcSet="displayImage"
-          :altText="`${product.title} image`"
-          :isFeatured="!!isUsingFeatured"
+          :alt-text="`${product.title} image`"
+          :img-url="displayImage"
         />
         <vue-glide v-else :perView="1" :startAt="1">
           <vue-glide-slide
             v-for="(image, index) in product.images"
             :key="index"
           >
-            <responsive-image
-              :lazySrcSet="image.src"
-              :altText="`${product.title} image`"
-              :isFeatured="!!isUsingFeatured"
+            <LazyImage
+              v-if="!isHovered"
+              :alt-text="`${product.title} image`"
+              :img-url="displayImage"
             />
           </vue-glide-slide>
         </vue-glide>
@@ -43,7 +42,7 @@
 </template>
 
 <script lang="">
-import ResponsiveImage from './responsive-image.vue'
+import LazyImage from './lazy-image.vue'
 import { Glide, GlideSlide } from 'vue-glide-js'
 // May need to remove this to make fade transition?
 import 'vue-glide-js/dist/vue-glide.css'
@@ -51,7 +50,7 @@ import 'vue-glide-js/dist/vue-glide.css'
 export default {
   name: `CollectionProductCard`,
   components: {
-    ResponsiveImage,
+    LazyImage,
     [Glide.name]: Glide,
     [GlideSlide.name]: GlideSlide
   },

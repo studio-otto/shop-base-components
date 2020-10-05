@@ -65,7 +65,7 @@ export default {
     },
     lazyLoadClass: {
       type: String,
-      default: "-contain -fade-in lazyload"
+      default: "-contain -fade-in lazy"
     },
     featuredImage: {
       type: String,

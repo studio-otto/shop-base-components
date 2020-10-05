@@ -5,7 +5,7 @@
     :data-srcset="lazySrc"
     data-sizes="auto"
     :alt="altText"
-    class="lazyload"
+    class="lazy"
     :class="classNames"
     :key="Math.random()"
   />

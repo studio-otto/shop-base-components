@@ -26,30 +26,21 @@
           :key="`cpc-image-${index}`"
           class="cpc-images__image absolute top-0 h-full w-full"
         >
-          <ResponsiveImage
+          <LazyImage
+            :alt-text="product.title + '' + image.alt"
+            :img-url="image.src"
             :class="[
               image.src === selectedVariantImage ? 'visible' : 'invisible',
               'h-full w-full object-cover lazypreload transition-none'
             ]"
-            :lazySrcSet="image.src"
-            :isFeatured="!!isUsingFeatured"
-            :altText="product.title + '' + image.alt"
           />
-          <!-- <div class="cpc-images__image absolute top-0 h-full w-full">
-          <ResponsiveImage
-            class="h-full w-full object-cover lazypreload"
-            :lazySrcSet="displayImage"
-            :isFeatured="!!isUsingFeatured"
-            :altText="product.title + 'image'"
-          /> -->
         </div>
 
         <div class="cpc-images__image-hover absolute top-0 h-full w-full">
-          <ResponsiveImage
+          <LazyImage
+            :alt-text="`${product.title} hover image`"
+            :img-url="selectedVariantHover"
             class="h-full w-full object-cover lazypreload transition-none"
-            :lazySrcSet="selectedVariantHover"
-            :isFeatured="false"
-            :altText="`${product.title} hover image`"
           />
         </div>
       </router-link>
@@ -58,12 +49,12 @@
 </template>
 
 <script>
-import ResponsiveImage from "./../global/ResponsiveImage";
+import LazyImage from "./../global/LazyImage";
 import moneyMethods from "./../../mixins/money-methods";
 
 export default {
   name: "CollectionProductImages",
-  components: { ResponsiveImage },
+  components: { LazyImage },
   mixins: [moneyMethods],
   props: {
     product: {

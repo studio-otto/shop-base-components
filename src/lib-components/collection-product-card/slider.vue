@@ -4,20 +4,20 @@
     <span @click="nextSlide">Next</span>
     <div class="cpc__slider-track">
       <div class="cpc__slider-slide" v-for="(image, index) in images">
-        <ResponsiveImage :lazySrcSet="image.src" :altText="image.alt" />
+        <LazyImage :img-url="image.src" :alt-text="image.alt" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ResponsiveImage from "../responsive-image.vue";
+import LazyImage from "../lazy-image.vue";
 import smoothscroll from "smoothscroll-polyfill";
 
 export default {
   name: "Slider",
   components: {
-    ResponsiveImage
+    LazyImage
   },
   props: {
     images: {

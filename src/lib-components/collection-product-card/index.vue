@@ -8,11 +8,10 @@
       >
         <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
         <router-link :to="url">
-          <responsive-image
+          <LazyImage
             v-if="(usesHover && !isHovered) || !usesHover"
-            :lazySrcSet="displayImage"
-            :altText="`${product.title} image`"
-            :isFeatured="!!isUsingFeatured"
+            :img-url="displayImage"
+            :alt-text="`${product.title} image`"
           />
         </router-link>
         <Slider v-if="usesHover && isHovered" :images="sliderImages" />
@@ -40,13 +39,13 @@
 </template>
 
 <script lang="">
-import ResponsiveImage from "../responsive-image.vue";
+import LazyImage from "../lazy-image.vue";
 import LoadingCard from './loading-card.vue';
 
 export default {
   name: `CollectionProductCard`,
   components: {
-    ResponsiveImage,
+    LazyImage,
     LoadingCard,
     Slider: () => import("./slider.vue")
   },

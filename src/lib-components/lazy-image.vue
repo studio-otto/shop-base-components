@@ -2,10 +2,10 @@
   <img
     data-testid="laze-image"
     data-src="image3.jpg"
-    :data-srcset="lazySrc"
+    v-lazy-src="lazySrc"
     data-sizes="auto"
     :alt="altText"
-    class="lazyload"
+    class="lazy"
     :class="classNames"
     :key="Math.random()"
   />

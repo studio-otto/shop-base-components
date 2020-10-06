@@ -9,7 +9,7 @@
         <LazyImage
           v-if="!isHovered"
           :alt-text="`${product.title} image`"
-          :img-url="displayImage"
+          :lazy-src-set="displayImage"
         />
         <vue-glide v-else :perView="1" :startAt="1">
           <vue-glide-slide
@@ -19,7 +19,7 @@
             <LazyImage
               v-if="!isHovered"
               :alt-text="`${product.title} image`"
-              :img-url="displayImage"
+              :lazy-src-set="displayImage"
             />
           </vue-glide-slide>
         </vue-glide>

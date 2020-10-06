@@ -10,7 +10,7 @@
         <router-link :to="url">
           <LazyImage
             v-if="(usesHover && !isHovered) || !usesHover"
-            :img-url="displayImage"
+            :lazy-src-set="displayImage"
             :alt-text="`${product.title} image`"
           />
         </router-link>

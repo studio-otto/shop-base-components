@@ -1,6 +1,6 @@
 <template>
   <div class="cart-tray__line-item">
-    <LazyImage :alt-text="lineItem.title" :img-url="lineItemImage" />
+    <LazyImage :alt-text="lineItem.title" :lazy-src-set="lineItemImage" />
     <div class="cart-tray__line-item-counter">
       <span @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
       <span>{{ lineItem.quantity }}</span>

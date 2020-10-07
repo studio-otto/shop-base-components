@@ -28,9 +28,9 @@
         >
           <LazyImage
             :alt-text="product.title + '' + image.alt"
-            :img-url="image.src"
+            :lazy-src-set="displayImage"
             :class="[
-              image.src === selectedVariantImage ? 'visible' : 'invisible',
+              displayImage === selectedVariantImage ? 'visible' : 'invisible',
               'h-full w-full object-cover lazypreload transition-none'
             ]"
           />
@@ -39,7 +39,7 @@
         <div class="cpc-images__image-hover absolute top-0 h-full w-full">
           <LazyImage
             :alt-text="`${product.title} hover image`"
-            :img-url="selectedVariantHover"
+            :lazy-src-set="selectedVariantHover"
             class="h-full w-full object-cover lazypreload transition-none"
           />
         </div>
@@ -65,7 +65,7 @@ export default {
     },
     lazyLoadClass: {
       type: String,
-      default: "-contain -fade-in lazyload"
+      default: "-contain -fade-in lazy"
     },
     featuredImage: {
       type: String,

@@ -5,7 +5,7 @@
         <img
           :key="product.id + '--' + index"
           :data-src="product.image + '&width=300'"
-          class="lazyload w-full h-full absolute top-0 object-cover"
+          class="lazy w-full h-full absolute top-0 object-cover"
         />
       </div>
       <div

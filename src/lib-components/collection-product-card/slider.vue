@@ -4,7 +4,7 @@
     <span @click="nextSlide">Next</span>
     <div class="cpc__slider-track">
       <div class="cpc__slider-slide" v-for="(image, index) in images">
-        <LazyImage :img-url="image.src" :alt-text="image.alt" />
+        <LazyImage :lazy-src-set="image.src" :alt-text="image.alt" />
       </div>
     </div>
   </div>

@@ -54,21 +54,29 @@ export default {
 
   computed: {
     lazySrc() {
-      return this.widthSizes
-        .map((size) => {
-          if (this.isFeatured) {
-            return `${
-              this.lazySrcSet ? this.lazySrcSet.replace('original', 'lrg') : ''
-            }?quality=80&progressive=true&width=${size} ${size}w`
-          } else {
-            return `${
-              this.lazySrcSet
-                ? this.lazySrcSet.replace(/.png|.jpeg|.jpg/, `_${size}x.jpg`)
-                : ''
-            } ${size}w`
-          }
-        })
-        .join(',')
+      return this.lazySrcSet.includes('cdn.shopify')
+        ? this.widthSizes
+            .map((size) => {
+              if (this.isFeatured) {
+                return `${
+                  this.lazySrcSet
+                    ? this.lazySrcSet.replace('original', 'lrg')
+                    : ''
+                }?quality=80&progressive=true&width=${size} ${size}w`
+              } else {
+                return `${
+                  this.lazySrcSet
+                    ? this.lazySrcSet.replace(
+                        /.png|.jpeg|.jpg/,
+                        `_${size}x.jpg`
+                      )
+                    : ''
+                } ${size}w`
+              }
+            })
+            .join(',')
+        : // TODO: handle non-shopify images srcset
+          this.lazySrcSet
     },
 
     aspectRatio() {

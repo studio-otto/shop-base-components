@@ -150,7 +150,7 @@ export default {
       if (!this.checkout || !this.checkout.lineItems) return '0'
       return this.formatMoney(this.checkout.lineItems.reduce((total, lineItem) => {
         return lineItem.variant
-          ? total + lineItem.quantity * parseFloat(lineItem.variant.price);
+          ? total + lineItem.quantity * parseFloat(lineItem.variant.price)
           : total
       }, 0));
     }

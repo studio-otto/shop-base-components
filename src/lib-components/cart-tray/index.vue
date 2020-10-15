@@ -55,7 +55,7 @@
     <div class="cart-tray__bottom">
       <div class="cart-tray__bottom-subtotal">
         <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
-        <span class="cart-tray__bottom-subtotal-amount">{{subtotal}}</span>
+        <span class="cart-tray__bottom-subtotal-amount">${{subtotal}}</span>
       </div>
       <button class="cart-tray__bottom-checkout" @click="goToCheckout">Checkout</button>
       <div class="cart-tray__bottom-text">{{ bottomText }}</div>
@@ -147,10 +147,10 @@ export default {
       };
     },
     subtotal() {
-      if (!this.checkout || !this.checkout.lineItems) return '$0.00'
-      return this.checkout.lineItems.reduce((total, lineItem) => {
+      if (!this.checkout || !this.checkout.lineItems) return '0'
+      return this.formatMoney(this.checkout.lineItems.reduce((total, lineItem) => {
         return total + lineItem.quantity * parseFloat(lineItem.variant.price);
-      }, 0).toFixed(2);
+      }, 0));
     }
   },
   methods: {
@@ -165,6 +165,9 @@ export default {
     },
     goToCheckout() {
       this.$emit("goToCheckout")
+    },
+    formatMoney(amount) {
+      return amount % 1 > 0 ? amount.toFixed(2) : `${amount}`
     }
   }
 };

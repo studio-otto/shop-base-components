@@ -1,12 +1,16 @@
 <template>
   <div class="cart-tray__line-item">
     <LazyImage :alt-text="lineItem.title" :lazy-src-set="lineItemImage" />
-    <div class="cart-tray__line-item-counter">
-      <span @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
-      <span>{{ lineItem.quantity }}</span>
-      <span @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
+    <div class="cart-tray__line-item-info">
+      <div class="cart-tray__line-item-title">{{ lineItem.title }}</div>
+      <div class="cart-tray__line-item-counter">
+        <span class="cart-tray__line-item-subtract" @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
+        <span class="cart-tray__line-item-quantity">{{ lineItem.quantity }}</span>
+        <span class="cart-tray__line-item-add" @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
+      </div>
+      <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
     </div>
-    <span @click="removeLineItem(lineItem.id)">Remove</span>
+    <div class="cart-tray__line-item-price">${{lineItem.variant.price}}</div>
   </div>
 </template>
 

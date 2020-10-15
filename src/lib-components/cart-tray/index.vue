@@ -53,7 +53,12 @@
       />
     </div>
     <div class="cart-tray__bottom">
-      <button>Checkout</button>
+      <div class="cart-tray__bottom-subtotal">
+        <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
+        <span class="cart-tray__bottom-subtotal-amount">{{subtotal}}</span>
+      </div>
+      <button class="cart-tray__bottom-checkout" @click="goToCheckout">Checkout</button>
+      <div class="cart-tray__bottom-text">{{ bottomText }}</div>
     </div>
   </div>
 </template>
@@ -119,6 +124,18 @@ export default {
       default: () => {
         return `Hello Otto`;
       }
+    },
+    bottomText: {
+      type: String,
+      default: () => {
+        return 'Shipping calculated at checkout'
+      }
+    },
+    subtotalText: {
+      type: String,
+      default: () => {
+        return 'SUBTOTAL'
+      }
     }
   },
   computed: {
@@ -128,6 +145,12 @@ export default {
         "--cart-background-color": this.backgroundColor,
         "--cart-max-width": `${this.maxWidth}px`
       };
+    },
+    subtotal() {
+      if (!this.checkout || !this.checkout.lineItems) return '$0.00'
+      return this.checkout.lineItems.reduce((total, lineItem) => {
+        return total + lineItem.quantity * parseFloat(lineItem.variant.price);
+      }, 0).toFixed(2);
     }
   },
   methods: {
@@ -139,6 +162,9 @@ export default {
     },
     updateLineItem({ id, quantity }) {
       this.$emit("updateLineItem", { id: id, quantity: quantity });
+    },
+    goToCheckout() {
+      this.$emit("goToCheckout")
     }
   }
 };

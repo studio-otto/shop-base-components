@@ -105,7 +105,7 @@ export default {
           ? this.product.images
             ? this.product.images[0]
             : ""
-          : this.product.images
+          : this.product.images && this.product.images[0]
           ? this.product.images[0].src
           : "";
       }

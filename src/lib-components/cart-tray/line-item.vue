@@ -10,7 +10,7 @@
       </div>
       <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
     </div>
-    <div class="cart-tray__line-item-price">${{lineItem.variant.price.replace(".00", '')}}</div>
+    <div class="cart-tray__line-item-price">${{lineIitem.variant ? lineItem.variant.price.replace(".00", '') : '0'}}</div>
   </div>
 </template>
 

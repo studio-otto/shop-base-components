@@ -31,10 +31,10 @@
       </div>
       <div class="cpc__details-price">
         <span v-if="isSaleItem" class="cpc__details-sale-price">
-          ${{ product.compareAtPrice }}
+          ${{ noZeros(product.compareAtPrice) }}
         </span>
         <span class="cpc__details-price">
-          ${{ product.price ? product.price : product.variants[0].price }}
+          ${{ noZeros(product.price ? product.price : product.variants[0].price)
         </span>
       </div>
     </div>
@@ -95,15 +95,19 @@ export default {
           ? this.product.images
             ? this.product.images[0]
             : ''
-          : this.product.images
+          : this.product.images && this.product.images[0]
           ? this.product.images[0].src
           : ''
       }
-    }
+    }    
   },
   methods: {
     toggleHover() {
       this.isHovered = !this.isHovered
+    },
+
+    noZeros(number) {
+      return Number(number.toFixed(0))
     }
   }
 }

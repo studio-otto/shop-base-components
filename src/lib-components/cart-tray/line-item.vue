@@ -10,7 +10,7 @@
       </div>
       <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
     </div>
-    <div class="cart-tray__line-item-price">${{lineIitem.variant ? lineItem.variant.price.replace(".00", '') : '0'}}</div>
+    <div class="cart-tray__line-item-price">${{lineItem.variant ? lineItem.variant.price.replace(".00", '') : '0'}}</div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     lineItemImage() {
-      return this.lineItem.variant.image.src;
+      return this.lineItem.variant ? this.lineItem.variant.image.src : "";
     }
   },
   methods: {

@@ -8,8 +8,20 @@
       >
         <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
         <router-link :to="url">
+          <video
+            v-if="video"
+            :src="video.url"
+            class="cpc__video"
+            autoplay
+            crossorigin
+            loop
+            muted
+            playsinline
+          >
+            <source v-lazy :data-src="video.url" type="video/mp4" />
+          </video>
           <LazyImage
-            v-if="(usesHover && !isHovered) || !usesHover"
+            v-else-if="(usesHover && !isHovered) || !usesHover"
             :lazy-src-set="displayImage"
             :alt-text="`${product.title} image`"
           />
@@ -109,6 +121,14 @@ export default {
           ? this.product.images[0].src
           : "";
       }
+    },
+
+    video() {
+      const videoObj = this.product.media && this.product.media.content
+        ? this.product.media.content.find((d) => d.mediaContentType === "VIDEO")
+        : null
+
+      return videoObj ? videoObj.sources.find((vid) => vid.format === 'mp4') : null
     }
   },
   methods: {

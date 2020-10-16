@@ -23,13 +23,13 @@
         <div class="cpc__details-price">
           <span v-if="isSaleItem" class="cpc__details-sale-price">
             ${{
-              product.compareAtPrice
+              noZeros(product.compareAtPrice
                 ? product.compareAtPrice
-                : product.variants[0].compareAtPrice
+                : product.variants[0].compareAtPrice)
             }}
           </span>
           <span class="cpc__details-price">
-            ${{ product.price ? product.price : product.variants[0].price }}
+            ${{ noZeros(product.price ? product.price : product.variants[0].price) }}
           </span>
         </div>
       </div>
@@ -114,6 +114,9 @@ export default {
   methods: {
     toggleHover() {
       this.isHovered = !this.isHovered;
+    },
+    noZeros(price) {
+      return price.replace('.00', '')
     }
   }
 };

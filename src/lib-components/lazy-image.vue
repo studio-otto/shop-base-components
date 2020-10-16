@@ -29,6 +29,12 @@ export default {
     altText: {
       type: String,
       default: 'Image'
+    },
+    widthSizes: {
+      type: Array,
+      default: () => {
+        return [180, 360, 540, 720, 900, 1080, 1200, 1800]
+      }
     }
   },
   data() {
@@ -36,8 +42,7 @@ export default {
       alt: '',
       aspectRatio: '',
       dimensions: {},
-      size: {},
-      widthSizes: [180, 360, 540, 720, 900, 1080, 1200, 1800]
+      size: {}
     }
   },
 

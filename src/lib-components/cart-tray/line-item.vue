@@ -1,12 +1,20 @@
 <template>
   <div class="cart-tray__line-item">
-    <LazyImage :alt-text="lineItem.title" :lazy-src-set="lineItemImage" />
-    <div class="cart-tray__line-item-counter">
-      <span @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
-      <span>{{ lineItem.quantity }}</span>
-      <span @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
+    <div class="cart-tray__line-item-img">
+      <LazyImage :alt-text="lineItem.title" :lazy-src-set="lineItemImage" :widthSizes="[200]" />
     </div>
-    <span @click="removeLineItem(lineItem.id)">Remove</span>
+    <div class="cart-tray__line-item-info">      
+      <div class="cart-tray__line-item-title">{{ lineItem.title }}</div>
+      <div class="cart-tray__line-item-info-sub">
+        <div class="cart-tray__line-item-counter">
+          <span class="cart-tray__line-item-subtract" @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
+          <span class="cart-tray__line-item-quantity">{{ lineItem.quantity }}</span>
+          <span class="cart-tray__line-item-add" @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
+        </div>
+        <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
+      </div>
+    </div>
+    <div class="cart-tray__line-item-price">${{lineItem.variant ? lineItem.variant.price.replace(".00", '') : '0'}}</div>
   </div>
 </template>
 
@@ -27,7 +35,7 @@ export default {
   },
   computed: {
     lineItemImage() {
-      return this.lineItem.variant.image.src;
+      return this.lineItem.variant ? this.lineItem.variant.image.src : "";
     }
   },
   methods: {

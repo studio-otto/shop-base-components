@@ -30,11 +30,12 @@
           @click="removeLineItem(lineItem.id)"
           >Remove</span
         >
-        <span
-          v-if="lineItem.customAttributes[0].value"
-          class="cart-tray__line-item-note"
-          >{{ lineItem.customAttributes[0].value }}</span
-        >
+      </div>
+      <div
+        v-if="lineItem.customAttributes[0].value"
+        class="cart-tray__line-item-note"
+      >
+        >{{ lineItem.customAttributes[0].value }}
       </div>
     </div>
     <div class="cart-tray__line-item-price">

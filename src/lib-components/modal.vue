@@ -13,7 +13,12 @@
     ></div>
 
     <div class="modal__inner">
-      <div class="modal__close" @click="$emit('close')">
+      <button
+        ref="modalClose"
+        class="modal__close"
+        @click="$emit('close')"
+        @keyup.esc.stop="$emit('close')"
+      >
         <svg
           width="11px"
           height="11px"
@@ -31,7 +36,7 @@
             </g>
           </g>
         </svg>
-      </div>
+      </button>
       <div class="modal__inner-title">{{ title }}</div>
       <div class="modal__inner-content">
         <slot></slot>
@@ -54,6 +59,22 @@ export default {
       type: String,
       default: () => {
         return ``
+      }
+    }
+  },
+  methods: {
+    focusModal() {
+      this.$nextTick(() => {
+        console.log('focusing')
+        this.$refs.modalClose.focus()
+      })
+    }
+  },
+  watch: {
+    open: function() {
+      if (this.open) {
+        console.log('opened')
+        this.focusModal()
       }
     }
   }
@@ -83,8 +104,8 @@ export default {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
+    z-index: 0;
   }
 
   .modal__inner {
@@ -93,7 +114,6 @@ export default {
     z-index: 2;
     background: white;
     padding: 1rem;
-    box-shadow: 0 30px 130px rgba(0, 0, 0, 0.26);
   }
 
   .modal__close {
@@ -101,6 +121,10 @@ export default {
     top: 1rem;
     right: 1rem;
     cursor: pointer;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    outline: none;
   }
 }
 </style>

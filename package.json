@@ -1,6 +1,10 @@
 {
   "name": "@studio-otto/shop-base-components",
+<<<<<<< HEAD
   "version": "2.1.29",
+=======
+  "version": "2.1.28",
+>>>>>>> e4a9136d... 2.1.28
   "description": "",
   "main": "dist/shop-base-components.ssr.js",
   "browser": "dist/shop-base-components.esm.js",

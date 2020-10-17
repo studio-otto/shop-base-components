@@ -35,7 +35,7 @@
         v-if="lineItem.customAttributes[0].value"
         class="cart-tray__line-item-note"
       >
-        >{{ lineItem.customAttributes[0].value }}
+        {{ lineItem.customAttributes[0].value }}
       </div>
     </div>
     <div class="cart-tray__line-item-price">

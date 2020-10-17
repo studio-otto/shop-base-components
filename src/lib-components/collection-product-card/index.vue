@@ -21,15 +21,20 @@
           {{ product.title }}
         </div>
         <div class="cpc__details-price">
-          <span v-if="isSaleItem" class="cpc__details-sale-price">
-            ${{
-              noZeros(product.compareAtPrice
-                ? product.compareAtPrice
-                : product.variants[0].compareAtPrice)
-            }}
+          <span v-if="product.availableForSale">
+            <span v-if="isSaleItem" class="cpc__details-sale-price">
+              ${{
+                noZeros(product.compareAtPrice
+                  ? product.compareAtPrice
+                  : product.variants[0].compareAtPrice)
+              }}
+            </span>
+            <span class="cpc__details-price">
+              ${{ noZeros(product.price ? product.price : product.variants[0].price) }}
+            </span>
           </span>
-          <span class="cpc__details-price">
-            ${{ noZeros(product.price ? product.price : product.variants[0].price) }}
+          <span v-else>
+            Sold Out
           </span>
         </div>
       </div>

@@ -85,6 +85,7 @@ export default {
     height: 100%;
     background: rgba(255, 255, 255, 0.9);
     cursor: pointer;
+    z-index: 0;
   }
 
   .modal__inner {

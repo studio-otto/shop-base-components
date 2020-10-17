@@ -29,7 +29,7 @@
         :disabled="!isValid"
       >
           <span v-if="isSending" class="klaviyo-form__submitting"></span>
-          <span v-if="isSending">&nbsp;</span>
+          <span v-if="isSending" class="klaviyo-form__disabled">{{ submitText }}</span>
           <span v-else>{{ submitText }}</span>
 			</button>
 	  </form>

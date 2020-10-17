@@ -33,9 +33,7 @@
         <span
           v-if="lineItem.customAttributes[0].value"
           class="cart-tray__line-item-note"
-          >{{
-            lineItem.customAttributes[0].value.replace(lineItem.title, '')
-          }}</span
+          >{{ lineItem.customAttributes[0].value }}</span
         >
       </div>
     </div>

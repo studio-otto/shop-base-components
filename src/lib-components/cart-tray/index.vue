@@ -4,61 +4,72 @@
     :class="[`cart-tray`, open ? `active` : `inactive`, `side-${side}`]"
     :style="cssProps"
   >
-    <div class="cart-tray__top-banner">
-      <div class="cart-tray__counter">
-        {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
+    <div class="cart-tray__inner">
+      <div class="cart-tray__top-banner">
+        <div class="cart-tray__counter">
+          {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
+        </div>
+        <div
+          data-testid="close-button"
+          @click="close"
+          aria-label="Close cart"
+          tabindex="0"
+          class="close-button"
+        >
+          <i class="icon icon--med"
+            ><svg
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.5,10.5 L1.5,1.5 L10.5,10.5 L1.5,19.5 L10.5,10.5 Z M10.5,10.5 L19.2675974,19.2675974 L10.5,10.5 L19.2675974,1.73240256 L10.5,10.5 Z"
+                stroke="#333"
+                fill="none"
+                fill-rule="evenodd"
+                stroke-linecap="square"
+              ></path></svg
+          ></i>
+        </div>
+      </div>
+      <div v-if="banner" class="cart-tray__banner">
+        {{ banner }}
       </div>
       <div
-        data-testid="close-button"
-        @click="close"
-        aria-label="Close cart"
-        tabindex="0"
-        class="close-button"
+        v-if="checkout && checkout.lineItems && checkout.lineItems.length === 0"
+        class="cart-tray__empty-message"
       >
-        <i class="icon icon--med"
-          ><svg
-            width="21"
-            height="21"
-            viewBox="0 0 21 21"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10.5,10.5 L1.5,1.5 L10.5,10.5 L1.5,19.5 L10.5,10.5 Z M10.5,10.5 L19.2675974,19.2675974 L10.5,10.5 L19.2675974,1.73240256 L10.5,10.5 Z"
-              stroke="#333"
-              fill="none"
-              fill-rule="evenodd"
-              stroke-linecap="square"
-            ></path></svg
-        ></i>
+        {{ emptyMessage }}
       </div>
-    </div>
-    <div v-if="banner" class="cart-tray__banner">
-      {{ banner }}
-    </div>
-    <div
-      v-if="checkout && checkout.lineItems && checkout.lineItems.length === 0"
-      class="cart-tray__empty-message"
-    >
-      {{ emptyMessage }}
-    </div>
-    <div
-      v-else-if="checkout"
-      v-for="(lineItem, index) in checkout.lineItems"
-      :key="lineItem.id"
-    >
-      <LineItem
-        :lineItem="lineItem"
-        @removeLineItem="removeLineItem"
-        @updateLineItem="updateLineItem"
-      />
-    </div>
-    <div class="cart-tray__bottom">
-      <div class="cart-tray__bottom-subtotal">
-        <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
-        <span class="cart-tray__bottom-subtotal-amount">${{subtotal}}</span>
+      <div
+        v-else-if="checkout"
+        v-for="(lineItem, index) in checkout.lineItems"
+        :key="lineItem.id"
+      >
+        <LineItem
+          :lineItem="lineItem"
+          :includeLineItemVariantSize="includeLineItemVariantSize"
+          :includeLineItemVariantColor="includeLineItemVariantColor"
+          :keepCents="keepCents"
+          @removeLineItem="removeLineItem"
+          @updateLineItem="updateLineItem"
+        />
       </div>
-      <button class="cart-tray__bottom-checkout" @click="goToCheckout">Checkout</button>
-      <div class="cart-tray__bottom-text">{{ bottomText }}</div>
+      <div class="cart-tray__bottom">
+        <div class="cart-tray__bottom-subtotal">
+          <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
+          <span class="cart-tray__bottom-subtotal-amount">${{subtotal}}</span>
+        </div>
+        <div
+          class="cart-tray__bottom-subtotal-bottom"
+          v-if="subtotalBottomText"
+        >
+          {{subtotalBottomText}}
+        </div>
+        <button class="cart-tray__bottom-checkout" @click="goToCheckout">{{checkoutText}}</button>
+        <div class="cart-tray__bottom-text">{{ bottomText }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -101,10 +112,10 @@ export default {
     side: {
       type: String,
       validator: function(value) {
-        return [`left`, `right`].indexOf(value) !== -1;
+        return ['left', 'right'].indexOf(value) !== -1;
       },
       default: () => {
-        return `right`;
+        return 'right';
       }
     },
     checkout: {
@@ -116,13 +127,13 @@ export default {
     emptyMessage: {
       type: String,
       default: () => {
-        return `Your cart is empty.`;
+        return 'Your cart is empty.';
       }
     },
     banner: {
       type: String,
       default: () => {
-        return `Hello Otto`;
+        return 'Hello Otto';
       }
     },
     bottomText: {
@@ -136,6 +147,30 @@ export default {
       default: () => {
         return 'SUBTOTAL'
       }
+    },
+    checkoutText: {
+      type: String,
+      default: () => {
+        return "Checkout"
+      }
+    },
+    subtotalBottomText: {
+      type: String,
+      default: () => {
+        return ''
+      }
+    },
+    includeLineItemVariantSize: {
+      type: Boolean,
+      default: false
+    },
+    includeLineItemVariantColor: {
+      type: Boolean,
+      default: false
+    },
+    keepCents: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -169,7 +204,7 @@ export default {
       this.$emit("goToCheckout")
     },
     formatMoney(amount) {
-      return amount % 1 > 0 ? amount.toFixed(2) : `${amount}`
+      return this.keepCents || amount % 1 > 0 ? amount.toFixed(2) : `${amount}`
     }
   }
 };

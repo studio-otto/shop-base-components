@@ -3,6 +3,7 @@
     <input
       ref="search-input"
       v-model="search"
+      :placeholder="placeholderText"
       type="text"
       class="search-input wide bg-transparent border-b-2 border-solid border-white w-full outline-none"
       @input="onChange"
@@ -15,20 +16,22 @@
         tag="div"
         class="flex flex-wrap"
       >
-        <div
-          v-for="(product, index) in products"
-          :key="'search-product-' + index"
-          :class="[
-            !product.image ? 'hidden' : '',
-            'search-result w-1/2 lg:w-1/3'
-          ]"
-        >
-          <SearchProductCard
-            v-if="product.available || product.tags.includes('restocking')"
-            :product="product"
-            :index="index"
-          />
-        </div>
+        <slot :products="products">
+          <div
+            v-for="(product, index) in products"
+            :key="'search-product-' + index"
+            :class="[
+              !product.image ? 'hidden' : '',
+              'search-result w-1/2 lg:w-1/3'
+            ]"
+          >
+            <SearchProductCard
+              v-if="product.available || product.tags.includes('restocking')"
+              :product="product"
+              :index="index"
+            />
+          </div>
+        </slot>
       </transition-group>
     </div>
   </div>
@@ -37,15 +40,23 @@
 <script>
 import axios from 'axios'
 import { throttle } from 'lodash'
-// import SearchProductCard from './SearchProductCard'
+import SearchProductCard from './search-product-card.vue'
 
 export default {
   name: 'Search',
+  components: {
+    SearchProductCard
+  },
   props: {
     domain: {
       type: String,
       required: false,
       default: ''
+    },
+    placeholderText: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
   data() {

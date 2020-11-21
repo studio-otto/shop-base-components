@@ -13,32 +13,18 @@ Install package
 yarn add @studio-otto/shop-base-components
 ```
 
-## Publishing
+## Developing
+<details>
+<summary>Publishing</summary>
 
 - `npm version patch`
 - `yarn build`
 - `npm publish`
 
+
 ## Components
 
-### Animated Value
-```
-import { AnimatedValue } from '@studio-otto/shop-base-components'
+[Documentation](https://github.com/studio-otto/shop-base-components/wiki)
 
-<animated-value :value="value" />
-```
-
-### Announcement Bar
-
-description goes here
-
-```
-import { AnnouncementBar } from '@studio-otto/shop-base-components'
-
-  <announcement-bar
-      :enabled="true"
-      backgroundColor="#220e89"
-      :slides="[{ url: `https://google.com`, text: 'Hello world' }, { url: `https://github.com`, text: 'Lorem ipsum dolor sit amet' }]"
-      textColor="#FFF"
-    />
-```
+## License
+MIT

@@ -10,6 +10,8 @@
     "dist/*",
     "src/**/*.vue"
   ],
+  "author": "Studio Otto<https://github.com/studio-otto>",
+  "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },

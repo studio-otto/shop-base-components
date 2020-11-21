@@ -137,7 +137,9 @@ export default {
     formatPrice(amount) {
       return this.keepCents
         ? amount
-        : amount.replace(".00", '')
+        : typeof(amount) === 'number'
+          ? amount
+          : amount.replace(".00", '')
     }
   }
 }

@@ -1,7 +1,12 @@
 <template>
   <div
     data-testid="cart-tray"
-    :class="[`cart-tray`, open ? `active` : `inactive`, `side-${side}`]"
+    :class="[
+      'cart-tray',
+      'side-${side}',
+      open ? 'active' : 'inactive',
+      isBusy ? 'busy': ''
+    ]"
     :style="cssProps"
   >
     <div class="cart-tray__inner">
@@ -33,29 +38,35 @@
           ></i>
         </div>
       </div>
+
       <div v-if="banner" class="cart-tray__banner">
         {{ banner }}
       </div>
+
       <div
         v-if="checkout && checkout.lineItems && checkout.lineItems.length === 0"
         class="cart-tray__empty-message"
       >
         {{ emptyMessage }}
       </div>
-      <div
-        v-else-if="checkout"
-        v-for="(lineItem, index) in checkout.lineItems"
-        :key="lineItem.id"
-      >
-        <LineItem
-          :lineItem="lineItem"
-          :includeLineItemVariantSize="includeLineItemVariantSize"
-          :includeLineItemVariantColor="includeLineItemVariantColor"
-          :keepCents="keepCents"
-          @removeLineItem="removeLineItem"
-          @updateLineItem="updateLineItem"
-        />
+      <div v-else-if="checkout" class="cart-tray__products-wrap">
+        <div        
+          v-for="(lineItem, index) in checkout.lineItems"
+          :key="`lineItem.id + ${index}`"
+        >
+          <LineItem
+            :lineItem="lineItem"
+            :includeLineItemVariantSize="includeLineItemVariantSize"
+            :includeLineItemVariantColor="includeLineItemVariantColor"
+            :keepCents="keepCents"
+            @removeLineItem="removeLineItem"
+            @updateLineItem="updateLineItem"
+          />
+        </div>
       </div>
+
+      <div class="cart-tray__spacer"></div>
+
       <div class="cart-tray__bottom">
         <div class="cart-tray__bottom-subtotal">
           <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
@@ -84,6 +95,12 @@ export default {
   },
   props: {
     open: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
+    },
+    isBusy: {
       type: Boolean,
       default: () => {
         return false;

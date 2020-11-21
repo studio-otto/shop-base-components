@@ -20,7 +20,7 @@ yarn add @studio-otto/shop-base-components
 - `npm version patch`
 - `yarn build`
 - `npm publish`
-
+</details>
 
 ## Components
 

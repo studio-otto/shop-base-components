@@ -32,12 +32,6 @@
         >
       </div>
       <div v-else class="cart-tray__line-item-info-sub">
-        <div
-          v-if="lineItem.customAttributes[0].value"
-          class="cart-tray__line-item-note"
-        >
-          >{{ lineItem.customAttributes[0].value }}
-        </div>
         <div class='cart-tray__line-item-info-listings'>
           <div v-if="includeLineItemVariantColor && color" class="cart-tray__line-item-info-color">{{color}}</div>
           <div class="cart-tray__line-item-info-size-and-quantity">
@@ -51,6 +45,13 @@
         </div>
     
         <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
+      </div>
+
+      <div
+        v-if="lineItem.customAttributes[0].value"
+        class="cart-tray__line-item-note"
+      >
+        {{ lineItem.customAttributes[0].value }}
       </div>
     </div>
     <div class="cart-tray__line-item-subtotal">

@@ -23,10 +23,11 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "gsap": "^3.5.1",
     "smoothscroll-polyfill": "^0.4.4",
+    "vanilla-lazyload": "^17.1.2",
     "vue-cookies": "^1.7.3",
-    "vue-router": "^3.4.3",
-    "vanilla-lazyload": "^17.1.2"
+    "vue-router": "^3.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -3,13 +3,14 @@
     data-testid="cart-tray"
     :class="[
       'cart-tray',
-      'side-${side}',
+      `side-${side}`,
       open ? 'active' : 'inactive',
       isBusy ? 'busy': ''
     ]"
     :style="cssProps"
   >
     <div class="cart-tray__inner">
+      <div class="cart-tray__content">
       <div class="cart-tray__top-banner">
         <div class="cart-tray__counter">
           {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
@@ -38,6 +39,7 @@
           ></i>
         </div>
       </div>
+    </div>
 
       <div v-if="banner" class="cart-tray__banner">
         {{ banner }}

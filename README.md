@@ -15,6 +15,14 @@ yarn add @studio-otto/shop-base-components
 
 ## Components
 
+### Animated Value
+```
+import { AnimatedValue } from '@studio-otto/shop-base-components'
+
+<animated-value :value="value" />
+```
+
+
 ### Announcement Bar
 
 description goes here

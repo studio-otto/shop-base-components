@@ -100,6 +100,7 @@ export default {
     color() {
       return this.includeLineItemVariantColor
           && this.hasOptions(1)
+          && this.lineItem.variant.selectedOptions[1].value !== 'Default Title'
         ? this.lineItem.variant.selectedOptions[1].value
         : ""
     },
@@ -107,6 +108,7 @@ export default {
     size() {
       return this.includeLineItemVariantSize
               && this.hasOptions(0)
+              && this.lineItem.variant.selectedOptions[0].value !== 'Default Title'
             ? this.lineItem.variant.selectedOptions[0].value
             : ""
     },

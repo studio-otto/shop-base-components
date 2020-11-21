@@ -1,5 +1,5 @@
-# shop-base-components
-Base components for Shopify Vue site
+# Base Components
+Studio Otto base components for Nuxt.js
 
 ## Install
 
@@ -13,6 +13,12 @@ Install package
 yarn add @studio-otto/shop-base-components
 ```
 
+## Publishing
+
+- `npm version patch`
+- `yarn build`
+- `npm publish`
+
 ## Components
 
 ### Animated Value
@@ -21,7 +27,6 @@ import { AnimatedValue } from '@studio-otto/shop-base-components'
 
 <animated-value :value="value" />
 ```
-
 
 ### Announcement Bar
 

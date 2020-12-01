@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { TweenLite, Power2 } from 'gsap'
+import { gsap, TweenLite, Power2 } from 'gsap'
 
 export default {
   name: 'AnimatedValue',
@@ -18,6 +18,10 @@ export default {
     value: {
       required: true
     }
+  },
+
+  mounted() {
+    gsap.registerPlugin(TweenLite, Power2)
   },
 
   methods: {

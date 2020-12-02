@@ -223,7 +223,7 @@ export default {
         ? amount
         : typeof(amount) === 'number'
           ? amount
-          : amount.replace(".00", '')
+          : amount.replace(".00", '').replace(".0", '')
     }
   }
 };

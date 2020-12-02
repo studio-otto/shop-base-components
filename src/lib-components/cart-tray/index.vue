@@ -202,7 +202,7 @@ export default {
     },
 
     subtotal() {
-      return this.checkout && this.checkout.subtotalPriceV2 ? formatPrice(this.checkout.subtotalPriceV2.amount) : ''
+      return this.checkout && this.checkout.subtotalPriceV2 ? this.formatPrice(this.checkout.subtotalPriceV2.amount) : ''
     }
   },
   methods: {

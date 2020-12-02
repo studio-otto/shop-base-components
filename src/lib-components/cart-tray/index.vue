@@ -72,7 +72,7 @@
       <div class="cart-tray__bottom">
         <div class="cart-tray__bottom-subtotal">
           <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
-          <span class="cart-tray__bottom-subtotal-amount">${{subtotal}}</span>
+          <span class="cart-tray__bottom-subtotal-amount">${{formatPrice(checkout.subtotalPriceV2.amount)}}</span>
         </div>
         <div
           class="cart-tray__bottom-subtotal-bottom"
@@ -199,14 +199,6 @@ export default {
         "--cart-background-color": this.backgroundColor,
         "--cart-max-width": `${this.maxWidth}px`
       };
-    },
-    subtotal() {
-      if (!this.checkout || !this.checkout.lineItems) return '0'
-      return this.formatMoney(this.checkout.lineItems.reduce((total, lineItem) => {
-        return lineItem.variant
-          ? total + lineItem.quantity * parseFloat(lineItem.variant.price)
-          : total
-      }, 0));
     }
   },
   methods: {

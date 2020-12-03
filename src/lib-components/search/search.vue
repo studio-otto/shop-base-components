@@ -1,13 +1,27 @@
 <template>
   <div class="search mt-10">
-    <input
-      ref="search-input"
-      v-model="search"
-      :placeholder="placeholderText"
-      type="text"
-      class="search-input wide bg-transparent border-b-2 border-solid border-white w-full outline-none"
-      @input="onChange"
-    />
+    <div class="search__input-wrap relative">
+      <label for="search-input" style="visibility:hidden">Search</label>
+      <input
+        ref="search-input"
+        id="search-input"
+        v-model="search"
+        :placeholder="placeholderText"
+        type="text"
+        :aria-label="placeholderText"
+        class="search-input wide bg-transparent border-b-2 border-solid border-white w-full outline-none"
+        @input="onChange"
+      />
+
+      <div
+        @click="search = ''"
+        @keyup.enter="search = ''"
+        aria-label="Reset search"
+        tabindex: =""
+      >
+        Reset
+      </div>
+    </div>
 
     <div v-if="showingProducts" class="search-results mt-10 pb-8">
       <transition-group
@@ -104,7 +118,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Access-Control-Allow-Origin': '*'
         },
-        url: `${this.domain}/search/suggest.json?q=${this.search}&resources[type]=product&options[unavailable_products]=last`
+        url: `${this.domain}/search/suggest.json?q=${this.search}&resources[type]=product&options[fields]=title,product_type,variants.title`
       }
 
       axios(options)

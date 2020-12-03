@@ -71,6 +71,10 @@ export default {
       type: String,
       required: false,
       default: ""
+    },
+    resetSearch: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -78,6 +82,13 @@ export default {
       search: '',
       results: [],
       products: []
+    }
+  },
+  watch: {
+    resetSearch: function(newVal) {
+      if (newVal) {
+        this.search = ''
+      }
     }
   },
   computed: {

@@ -49,6 +49,7 @@
             Sold Out
           </span>
         </div>
+        <slot name="footer" class="cpc__details-lower"></slot>
       </div>
     </div>
     <LoadingCard v-else :handle="product.handle" />

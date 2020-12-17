@@ -1,14 +1,24 @@
 <template>
   <div class="cart-tray__line-item">
     <div class="cart-tray__line-item-img">
-      <LazyImage
-        :alt-text="lineItem.title"
-        :lazy-src-set="lineItemImage"
-        :widthSizes="[200]"
-      />
+      <router-link
+        :to="lineItem.variant.product.handle"
+        :aria-label="`View ${lineItem.title}`"
+      >
+        <LazyImage
+          :alt-text="lineItem.title"
+          :lazy-src-set="lineItemImage"
+          :widthSizes="[200]"
+        />
+      </router-link>
     </div>
     <div class="cart-tray__line-item-info">
-      <div class="cart-tray__line-item-title">{{ lineItem.title }}</div>
+      <router-link
+        :to="lineItem.variant.product.handle"
+        :aria-label="`View ${lineItem.title}`"
+      >
+        <div class="cart-tray__line-item-title">{{ lineItem.title }}</div>
+      </router-link>
       <div v-if="!includeLineItemVariantSize && !includeLineItemVariantSize" class="cart-tray__line-item-info-sub">
         <div class="cart-tray__line-item-counter">
           <span

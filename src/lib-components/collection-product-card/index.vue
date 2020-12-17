@@ -25,8 +25,14 @@
             :lazy-src-set="displayImage"
             :alt-text="`${product.title} image`"
           />
+          <LazyImage
+            v-if="usesHover && !isHovered"
+            :lazy-src-set="hoverImage"
+            :alt-text="`${product.title} second image`"
+            class="cpc__hover-img"
+          />
+          <Slider v-else-if="usesSliderHover && isHovered" :images="sliderImages" />
         </router-link>
-        <Slider v-if="usesHover && isHovered" :images="sliderImages" />
       </div>
       <div class="cpc__details">
         <div class="cpc__details-title">
@@ -49,7 +55,7 @@
             Sold Out
           </span>
         </div>
-        <slot name="footer" class="cpc__details-lower"></slot>
+        <slot name="footer"></slot>
       </div>
     </div>
     <LoadingCard v-else :handle="product.handle" />
@@ -97,6 +103,12 @@ export default {
         return false;
       }
     },
+    usesSliderHover: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
+    },
     featuredImage: {
       type: Object,
       default: () => {
@@ -112,9 +124,11 @@ export default {
             this.product.variants[0].compareAtPrice >
               this.product.variants[0].price;
     },
+
     sliderImages() {
       return this.product.images.slice(1);
     },
+
     displayImage() {
       if (this.featuredImage && this.isUsingFeatured) {
         return this.featuredImage;
@@ -127,6 +141,12 @@ export default {
           ? this.product.images[0].src
           : "";
       }
+    },
+
+    hoverImage() {
+      return this.product.images && this.product.images[1]
+          ? this.product.images[0].src
+          : ""
     },
 
     video() {

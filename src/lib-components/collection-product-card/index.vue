@@ -2,7 +2,11 @@
   <div class="cpc" data-testid="cpc">
     <div v-if="product && product.isLoaded">
       <div
-        class="cpc__image"
+        :class="[
+          'cpc__image',
+          isHovered ? 'hovering' : '',
+          usesHover ? 'uses-hover' : ''
+        ]"
         @mouseover="isHovered = true"
         @mouseleave="isHovered = false"
       >
@@ -21,12 +25,12 @@
             <source v-lazy :data-src="video.url" type="video/mp4" />
           </video>
           <LazyImage
-            v-else-if="(usesHover && !isHovered) || !usesHover"
+            v-else
             :lazy-src-set="displayImage"
             :alt-text="`${product.title} image`"
           />
           <LazyImage
-            v-if="usesHover && !isHovered"
+            v-if="usesHover"
             :lazy-src-set="hoverImage"
             :alt-text="`${product.title} second image`"
             class="cpc__hover-img"

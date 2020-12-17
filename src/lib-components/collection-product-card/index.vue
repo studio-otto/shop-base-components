@@ -149,7 +149,7 @@ export default {
 
     hoverImage() {
       return this.product.images && this.product.images[1]
-          ? this.product.images[0].src
+          ? this.product.images[1].src
           : ""
     },
 

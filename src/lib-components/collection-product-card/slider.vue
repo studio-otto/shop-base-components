@@ -1,9 +1,23 @@
 <template>
   <div class="cpc__slider-wrapper">
-    <span @click="prevSlide">Prev</span>
-    <span @click="nextSlide">Next</span>
+    <span
+      aria-label="Previous slide"
+      tabindex="0"
+      @click="prevSlide"
+      @keydown.enter="prevSlide"
+    >Prev</span>
+    <span
+      aria-label="Next slide"
+      tabindex="0"
+      @click="nextSlide"
+      @keydown.enter="nextSlide"
+    >Next</span>
     <div class="cpc__slider-track">
-      <div class="cpc__slider-slide" v-for="(image, index) in images">
+      <div
+        class="cpc__slider-slide"
+        v-for="(image, index) in images"
+        :key="`slider-image-${index}`"
+      >
         <LazyImage :lazy-src-set="image.src" :alt-text="image.alt" />
       </div>
     </div>

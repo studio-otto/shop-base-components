@@ -1,7 +1,7 @@
 <template>
   <div class="search mt-10">
     <div class="search__input-wrap relative">
-      <label for="search-input" style="visibility:hidden">Search</label>
+      <label for="search-input" class="sr-only">Search</label>
       <input
         ref="search-input"
         id="search-input"
@@ -9,15 +9,16 @@
         :placeholder="placeholderText"
         type="text"
         :aria-label="placeholderText"
+        tabindex="0"
         class="search-input wide bg-transparent border-b-2 border-solid border-white w-full outline-none"
         @input="onChange"
       />
 
       <div
         @click="search = ''"
-        @keyup.enter="search = ''"
+        @keydown.enter="search = ''"
         aria-label="Reset search"
-        tabindex: =""
+        tabindex="0"
       >
         Reset
       </div>

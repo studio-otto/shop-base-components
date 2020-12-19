@@ -8,12 +8,20 @@
     <div
       class="modal__mask"
       @click="$emit('close')"
+      @keydown.enter="$emit('close')"
+      tabindex="0"
       aria-label="Close modal"
       data-testid="modal-mask"
     ></div>
 
     <div class="modal__inner">
-      <div class="modal__close" @click="$emit('close')">
+      <div
+        class="modal__close"
+        @click="$emit('close')"
+        @keydown.enter="$emit('close')"
+        aria-label="Close modal"
+        tabindex="0"
+      >
         <svg
           width="11px"
           height="11px"

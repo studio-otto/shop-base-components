@@ -24,6 +24,9 @@
           <span
             class="cart-tray__line-item-subtract"
             @click="updateLineItem(lineItem.id, lineItem.quantity - 1)"
+            @keydown.enter="updateLineItem(lineItem.id, lineItem.quantity - 1)"
+            tabindex="0"
+            aria-label="Decrease quantity"
             >-</span
           >
           <span class="cart-tray__line-item-quantity">{{
@@ -32,12 +35,18 @@
           <span
             class="cart-tray__line-item-add"
             @click="updateLineItem(lineItem.id, lineItem.quantity + 1)"
+            @keydown.enter="updateLineItem(lineItem.id, lineItem.quantity + 1)"
+            tabindex="0"
+            aria-label="Increase quantity"
             >+</span
           >
         </div>
         <span
           class="cart-tray__line-item-remove"
           @click="removeLineItem(lineItem.id)"
+          @keydown.enter="removeLineItem(lineItem.id)"
+          tabindex="0"
+          aria-label="Remove"
           >Remove</span
         >
       </div>
@@ -47,14 +56,32 @@
           <div class="cart-tray__line-item-info-size-and-quantity">
             <div v-if="includeLineItemVariantSize && size" class="cart-tray__line-item-size">{{size}}</div>
             <div class="cart-tray__line-item-counter">
-              <span class="cart-tray__line-item-subtract" @click="updateLineItem(lineItem.id, lineItem.quantity - 1)">-</span>
+              <span
+                class="cart-tray__line-item-subtract"
+                @click="updateLineItem(lineItem.id, lineItem.quantity - 1)"
+                @keydown.enter="updateLineItem(lineItem.id, lineItem.quantity - 1)"
+                aria-label="Decrease quantity"
+                tabindex="0"
+              >-</span>
               <span class="cart-tray__line-item-quantity">{{ lineItem.quantity }}</span>
-              <span class="cart-tray__line-item-add" @click="updateLineItem(lineItem.id, lineItem.quantity + 1)">+</span>
+              <span
+                class="cart-tray__line-item-add"
+                tabindex="0"
+                aria-label="Increase quantity"
+                @click="updateLineItem(lineItem.id, lineItem.quantity + 1)"
+                @keydown.enter="updateLineItem(lineItem.id, lineItem.quantity + 1)"
+              >+</span>
             </div>
           </div>
         </div>
     
-        <span class="cart-tray__line-item-remove" @click="removeLineItem(lineItem.id)">Remove</span>
+        <span
+          class="cart-tray__line-item-remove"
+          tabindex="0"
+          aria-label="Remove"
+          @click="removeLineItem(lineItem.id)"
+          @keydown.enter="removeLineItem(lineItem.id)"
+        >Remove</span>
       </div>
 
       <div

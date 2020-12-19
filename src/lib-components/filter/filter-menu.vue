@@ -14,6 +14,9 @@
                 : '-unselected'
             ]"
             @click="$emit('selectStagedNewFilter', filterType, filter)"
+            @keydown.enter="$emit('selectStagedNewFilter', filterType, filter)"
+            :aria-label="`Add filter, ${filter}`"
+            tabindex="0"
           >
             {{ filter }}
           </div>
@@ -21,8 +24,20 @@
       </div>
     </div>
     <div>
-      <button @click="$emit('updateCurrentFilters', 'reset')">Clear</button>
-      <button @click="$emit('updateCurrentFilters')">Apply</button>
+      <button
+        type="button"
+        tabindex="0"
+        aria-label="Clear"
+        @click="$emit('updateCurrentFilters', 'reset')"
+        @keydown.enter="$emit('updateCurrentFilters', 'reset')"
+      >Clear</button>
+      <button
+        type="button"
+        tabindex="0"
+        aria-label="Apply"
+        @click="$emit('updateCurrentFilters')"
+        @keydown.enter="$emit('updateCurrentFilters')"
+      >Apply</button>
     </div>
   </div>
 </template>

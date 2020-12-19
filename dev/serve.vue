@@ -148,8 +148,20 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <button @click="toggleCart">Toggle cart tray</button>
-    <button @click="toggleModal">Toggle modal</button>
+    <button
+      type="button"
+      aria-label="Toggle cart tray"
+      tabindex="0"
+      @click="toggleCart"
+      @keydown.enter="toggleCart"
+    >Toggle cart tray</button>
+    <button
+      type="button"
+      aria-label="Toggle modal"
+      tabindex="0"
+      @click="toggleModal"
+      @keydown.enter="toggleModal"
+    >Toggle modal</button>
     <cart-tray
       :checkout="checkout"
       :open="cartOpen"

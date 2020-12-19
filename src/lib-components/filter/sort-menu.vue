@@ -8,13 +8,29 @@
         sortOption.value === activeSort ? '-selected' : '-unselected'
       ]"
       @click="stagedSort = sortOption.value"
+      @keydown.enter="stagedSort = sortOption.value"
+      tabindex="0"
+      type="button"
+      :aria-label="`Apply sort, ${sortOption.label}`"
     >
       {{ sortOption.label }}
     </button>
 
     <div>
-      <button @click="applySort('')">Reset</button>
-      <button @click="applySort(activeSort)">Apply</button>
+      <button
+        type="button"
+        aria-label=""
+        tabindex=""
+        @click="applySort('')"
+        @keydown.enter="applySort('')"
+      >Reset</button>
+      <button
+        type="button"
+        aria-label=""
+        tabindex=""
+        @click="applySort(activeSort)"
+        @keydown.enter="applySort(activeSort)"
+      >Apply</button>
     </div>
   </div>
 </template>

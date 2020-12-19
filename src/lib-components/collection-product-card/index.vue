@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script lang="">
+<script>
 import LazyImage from "../lazy-image.vue";
 import LoadingCard from './loading-card.vue';
 

@@ -2,7 +2,7 @@
   <div class="klaviyo-form">
    <form @keydown.enter.prevent='' aria-label="Newsletter Signup" class="relative">
       <div class="klaviyo__input-wrap">
-        <label aria-label="Newsletter Signup"></label>
+        <label aria-label="Newsletter Signup" class="sr-only"></label>
         <input
           :class="{
             'input': true,
@@ -13,8 +13,9 @@
           @focus="inputFocused()"
           type="text"
           placeholder="Email"
-          @keyup.enter="sendForm()"
+          @keydown.enter="sendForm()"
           tabindex="0"
+          title="Email address"
           aria-label="Email Address"
         />
 			</div>
@@ -23,7 +24,7 @@
         type="button"
         class="klaviyo-form__submit"
         @click="sendForm()"
-        @keyup.enter="sendForm()"
+        @keydown.enter="sendForm()"
         :aria-label="submitText"
         tabindex="0"
         :disabled="!isValid"

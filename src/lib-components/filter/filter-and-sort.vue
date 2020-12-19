@@ -7,7 +7,13 @@
           selectedMenu === 'filter' ? '-selected' : '-not-selected'
         ]"
       >
-        <button @click="selectedMenu = 'filter'">
+        <button
+          type="button"
+          @click="selectedMenu = 'filter'"
+          @keydown.enter="selectedMenu = 'filter'"
+          aria-label="Filter"
+          tabindex="0"
+        >
           Filter
         </button>
         <div
@@ -29,6 +35,9 @@
             v-for="filter in currentFilters[filterType]"
             :key="filter"
             @click="removeFilter(filterType, filter)"
+            @keydown.enter="removeFilter(filterType, filter)"
+            :aria-label="`Remove ${filter} filter`"
+            tabindex="0"
           >
             <span>{{ filter }}</span> X
           </div>
@@ -45,7 +54,13 @@
           selectedMenu === 'sort' ? '-selected' : '-not-selected'
         ]"
       >
-        <button @click="selectedMenu = 'sort'">
+        <button
+          @click="selectedMenu = 'sort'"
+          @keydown.enter="selectedMenu = 'sort'"
+          aria-label="Sort"
+          tabindex="0"
+          type="button"
+        >
           Sort
         </button>
         <div
@@ -62,6 +77,9 @@
       <div
         :class="['mask', selectedMenu ? '-showing' : '-hidden']"
         @click="selectedMenu = ''"
+        @keydown.enter="selectedMenu = ''"
+        aria-label="Close filter"
+        tabindex="0"
       ></div>
     </div>
 

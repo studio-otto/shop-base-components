@@ -12,7 +12,13 @@
       </a>
     </div>
     <div class="cookie-consent__description">
-      <button @click="setCookie">{{ acceptText }}</button>
+      <button
+        type="button"
+        @click="setCookie"
+        @keydown.enter="setCookie"
+        aria-label="Accept cookies"
+        tabindex="0"
+      >{{ acceptText }}</button>
     </div>
   </div>
 </template>

@@ -18,6 +18,7 @@
         <div
           data-testid="close-button"
           @click="close"
+          @keyup.enter="close"
           aria-label="Close cart"
           tabindex="0"
           class="close-button"
@@ -80,7 +81,14 @@
         >
           {{subtotalBottomText}}
         </div>
-        <button class="cart-tray__bottom-checkout" @click="goToCheckout">{{checkoutText}}</button>
+        <button
+          class="cart-tray__bottom-checkout"
+          type="button"
+          @click="goToCheckout"
+          @keydown.enter="goToCheckout"
+          :aria-label="checkoutText"
+          tabindex="0"
+        >{{checkoutText}}</button>
         <div class="cart-tray__bottom-text">{{ bottomText }}</div>
       </div>
     </div>

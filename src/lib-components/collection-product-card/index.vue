@@ -13,7 +13,7 @@
         <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
         <router-link :to="url">
           <video
-            v-if="video"
+            v-if="video && usesVideos"
             :src="video.url"
             class="cpc__video"
             autoplay
@@ -112,6 +112,10 @@ export default {
       default: () => {
         return false;
       }
+    },
+    usesVideo: {
+      type: Boolean,
+      default: true
     },
     featuredImage: {
       type: Object,

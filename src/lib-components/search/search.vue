@@ -49,6 +49,9 @@
         </slot>
       </transition-group>
     </div>
+    <div v-if="showingProducts && results.length == 0">
+      0 results
+    </div>
   </div>
 </template>
 
@@ -110,15 +113,7 @@ export default {
         window.location.host.includes('localhost') &&
         !this.domain.includes('cors-anywhere')
       ) {
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        console.log(
-          "Looks like you're on localhost! Search requires a proxy to not get rejected."
-        )
-        console.log(
-          'Try something like :domain=https://cors-anywhere.herokuapp.com/https://miaouxx.myshopify.com'
-        )
-        console.log('but dont forget to remove for production.')
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        
       }
     },
 

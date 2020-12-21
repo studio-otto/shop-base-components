@@ -49,8 +49,11 @@
         </slot>
       </transition-group>
     </div>
-    <div v-if="showingProducts && results.length == 0">
+    <div v-if="showingProducts && products.length === 0">
       0 results
+    </div>
+    <div v-if="isSearching" class="search__searching">
+      Searching ...
     </div>
   </div>
 </template>
@@ -84,6 +87,7 @@ export default {
   data() {
     return {
       search: '',
+      isSearching: false,
       results: [],
       products: []
     }
@@ -119,6 +123,7 @@ export default {
 
     sendQuery: throttle(function () {
       this.checkLocalhostAndWarn()
+      this.isSearching = true
       const options = {
         method: 'GET',
         headers: {
@@ -131,6 +136,7 @@ export default {
       axios(options)
         .then((response) => {
           this.products = response.data.resources.results.products
+          this.isSearching = false
         })
         .catch((e) => {
           console.log(e)

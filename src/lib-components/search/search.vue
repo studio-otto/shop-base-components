@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div v-if="showingProducts && !isSearching" class="search-results mt-10 pb-8">
+    <div v-if="showingProducts && !isSearching && products.length > 0" class="search-results mt-10 pb-8">
       <transition-group
         name="list"
         mode="out-in"

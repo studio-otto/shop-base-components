@@ -49,7 +49,7 @@
         </slot>
       </transition-group>
     </div>
-    <div v-if="showingProducts && products.length === 0 && !isSearchinig">
+    <div v-if="showingProducts && products.length === 0 && !isSearchinig" class="search__no-results">
       0 results
     </div>
     <div v-if="showingProducts && isSearching" class="search__searching"></div>

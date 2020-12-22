@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div v-if="showingProducts" class="search-results mt-10 pb-8">
+    <div v-if="showingProducts && !isSearching" class="search-results mt-10 pb-8">
       <transition-group
         name="list"
         mode="out-in"
@@ -49,12 +49,10 @@
         </slot>
       </transition-group>
     </div>
-    <div v-if="showingProducts && products.length === 0">
+    <div v-if="showingProducts && products.length === 0 && !isSearchinig">
       0 results
     </div>
-    <div v-if="isSearching" class="search__searching">
-      Searching ...
-    </div>
+    <div v-if="showingProducts && isSearching" class="search__searching"></div>
   </div>
 </template>
 

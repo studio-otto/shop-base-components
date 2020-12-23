@@ -7,9 +7,9 @@
       {{ description }}
     </div>
     <div v-if="ctaUrl" class="cookie-consent__cta">
-      <a :href="ctaUrl" target="_blank" rel="noopener noreferrer">
+      <nuxt-link :to="ctaUrl" target="_blank" rel="noopener noreferrer">
         {{ cta }}
-      </a>
+      </nuxt-link>
     </div>
     <div class="cookie-consent__description">
       <button
@@ -31,13 +31,16 @@ export default {
   components: {
     VueCookies
   },
+  data() {
+    open: true
+  },
   props: {
-    open: {
-      type: Boolean,
-      default: () => {
-        return true
-      }
-    },
+    // open: {
+    //   type: Boolean,
+    //   default: () => {
+    //     return true
+    //   }
+    // },
     title: {
       type: String,
       default: () => {
@@ -71,7 +74,7 @@ export default {
   },
   methods: {
     setCookie() {
-      VueCookies.set('cookie_consent', 1, '1m')
+      VueCookies.set('cookie_consent', 1, '6m')
       this.open = false
     }
   },

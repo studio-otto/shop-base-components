@@ -32,7 +32,9 @@ export default {
     VueCookies
   },
   data() {
-    open: true
+    return {
+      open: true
+    }
   },
   props: {
     // open: {
@@ -74,13 +76,13 @@ export default {
   },
   methods: {
     setCookie() {
-      VueCookies.set('cookie_consent', 1, '6m')
+      VueCookies.set('__ab_cookie_consent', 1, '6m')
       this.open = false
     }
   },
   computed: {
     accepted() {
-      const accepted = VueCookies.get('cookie_consent')
+      const accepted = VueCookies.get('__ab_cookie_consent')
       if (accepted) {
         return true
       } else {

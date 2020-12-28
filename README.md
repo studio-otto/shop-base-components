@@ -1,7 +1,6 @@
-# Base Components
-Studio Otto base components for Nuxt.js
+![](https://cirro-misc.s3.amazonaws.com/Github%20Images/base-01.jpg)
 
-## Install
+## Installation
 
 Create `.npmrc` file in project directory
 ```

@@ -1,0 +1,9 @@
+- name: GitHub App token
+  # You may pin to the exact commit or the version.
+  # uses: tibdex/github-app-token@0987404cee652a6cda2dfc1071a4fbf9c7ce7c69
+  uses: tibdex/github-app-token@v1.0.2
+  with:
+    # ID of the GitHub App.
+    app_id: 94914
+    # Private key of the GitHub App (can be Base64 encoded).
+    private_key: SHA256:x5x9iB3dhYD5fISQxFKJW5eDMFCjnZ1U8iRkQfVNXAs=

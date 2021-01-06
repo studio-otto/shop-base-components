@@ -24,7 +24,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "gsap": "^3.5.1",
     "smoothscroll-polyfill": "^0.4.4",
     "vanilla-lazyload": "^17.1.2",

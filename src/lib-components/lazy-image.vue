@@ -7,6 +7,8 @@
     :src="lowRes"
     :data-srcset="urlString"
     :alt="altText"
+    width="600"
+    height="300"
     :style="{ backgroundColor: backgroundColor }"
   />
 </template>

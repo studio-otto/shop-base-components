@@ -5,42 +5,42 @@
       'cart-tray',
       `side-${side}`,
       open ? 'active' : 'inactive',
-      isBusy ? 'busy': ''
+      isBusy ? 'busy' : ''
     ]"
     :style="cssProps"
   >
     <div class="cart-tray__inner">
       <div class="cart-tray__content">
-      <div class="cart-tray__top-banner">
-        <div class="cart-tray__counter">
-          {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
-        </div>
-        <div
-          data-testid="close-button"
-          @click="close"
-          @keyup.enter="close"
-          aria-label="Close cart"
-          tabindex="0"
-          class="close-button"
-        >
-          <i class="icon icon--med"
-            ><svg
-              width="21"
-              height="21"
-              viewBox="0 0 21 21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.5,10.5 L1.5,1.5 L10.5,10.5 L1.5,19.5 L10.5,10.5 Z M10.5,10.5 L19.2675974,19.2675974 L10.5,10.5 L19.2675974,1.73240256 L10.5,10.5 Z"
-                stroke="#333"
-                fill="none"
-                fill-rule="evenodd"
-                stroke-linecap="square"
-              ></path></svg
-          ></i>
+        <div class="cart-tray__top-banner">
+          <div class="cart-tray__counter">
+            {{ checkout && checkout.lineItems ? checkout.lineItems.length : 0 }}
+          </div>
+          <div
+            data-testid="close-button"
+            @click="close"
+            @keyup.enter="close"
+            aria-label="Close cart"
+            tabindex="0"
+            class="close-button"
+          >
+            <i class="icon icon--med"
+              ><svg
+                width="21"
+                height="21"
+                viewBox="0 0 21 21"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.5,10.5 L1.5,1.5 L10.5,10.5 L1.5,19.5 L10.5,10.5 Z M10.5,10.5 L19.2675974,19.2675974 L10.5,10.5 L19.2675974,1.73240256 L10.5,10.5 Z"
+                  stroke="#333"
+                  fill="none"
+                  fill-rule="evenodd"
+                  stroke-linecap="square"
+                ></path></svg
+            ></i>
+          </div>
         </div>
       </div>
-    </div>
 
       <div v-if="banner" class="cart-tray__banner">
         {{ banner }}
@@ -53,7 +53,7 @@
         {{ emptyMessage }}
       </div>
       <div v-else-if="checkout" class="cart-tray__products-wrap">
-        <div        
+        <div
           v-for="(lineItem, index) in checkout.lineItems"
           :key="`lineItem.id + ${index}`"
         >
@@ -70,16 +70,22 @@
 
       <div class="cart-tray__spacer"></div>
 
+      <div class="cart-tray__pre-checkout">
+        <slot name="preCheckout"></slot>
+      </div>
+
       <div class="cart-tray__bottom">
         <div class="cart-tray__bottom-subtotal">
-          <span class="cart-tray__bottom-subtotal-label">{{ subtotalText }}</span>
-          <span class="cart-tray__bottom-subtotal-amount">${{subtotal}}</span>
+          <span class="cart-tray__bottom-subtotal-label">{{
+            subtotalText
+          }}</span>
+          <span class="cart-tray__bottom-subtotal-amount">${{ subtotal }}</span>
         </div>
         <div
           class="cart-tray__bottom-subtotal-bottom"
           v-if="subtotalBottomText"
         >
-          {{subtotalBottomText}}
+          {{ subtotalBottomText }}
         </div>
         <button
           class="cart-tray__bottom-checkout"
@@ -88,7 +94,9 @@
           @keydown.enter="goToCheckout"
           :aria-label="checkoutText"
           tabindex="0"
-        >{{checkoutText}}</button>
+        >
+          {{ checkoutText }}
+        </button>
         <div class="cart-tray__bottom-text">{{ bottomText }}</div>
       </div>
     </div>
@@ -96,7 +104,7 @@
 </template>
 
 <script lang="">
-import LineItem from "./line-item.vue";
+import LineItem from './line-item.vue'
 
 export default {
   name: `CartTray`,
@@ -107,60 +115,60 @@ export default {
     open: {
       type: Boolean,
       default: () => {
-        return false;
+        return false
       }
     },
     isBusy: {
       type: Boolean,
       default: () => {
-        return false;
+        return false
       }
     },
     maxWidth: {
       type: Number,
       default: () => {
-        return 600;
+        return 600
       }
     },
     textColor: {
       type: String,
       // TODO validate hex color
       default: () => {
-        return "#000000";
+        return '#000000'
       }
     },
     backgroundColor: {
       // TODO validate hex color
       type: String,
       default: () => {
-        return "#FFFFFF";
+        return '#FFFFFF'
       }
     },
     side: {
       type: String,
       validator: function(value) {
-        return ['left', 'right'].indexOf(value) !== -1;
+        return ['left', 'right'].indexOf(value) !== -1
       },
       default: () => {
-        return 'right';
+        return 'right'
       }
     },
     checkout: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     },
     emptyMessage: {
       type: String,
       default: () => {
-        return 'Your cart is empty.';
+        return 'Your cart is empty.'
       }
     },
     banner: {
       type: String,
       default: () => {
-        return 'Hello Otto';
+        return 'Hello Otto'
       }
     },
     bottomText: {
@@ -178,7 +186,7 @@ export default {
     checkoutText: {
       type: String,
       default: () => {
-        return "Checkout"
+        return 'Checkout'
       }
     },
     subtotalBottomText: {
@@ -203,38 +211,40 @@ export default {
   computed: {
     cssProps() {
       return {
-        "--cart-text-color": this.textColor,
-        "--cart-background-color": this.backgroundColor,
-        "--cart-max-width": `${this.maxWidth}px`
-      };
+        '--cart-text-color': this.textColor,
+        '--cart-background-color': this.backgroundColor,
+        '--cart-max-width': `${this.maxWidth}px`
+      }
     },
 
     subtotal() {
-      return this.checkout && this.checkout.subtotalPriceV2 ? this.formatPrice(this.checkout.subtotalPriceV2.amount) : ''
+      return this.checkout && this.checkout.subtotalPriceV2
+        ? this.formatPrice(this.checkout.subtotalPriceV2.amount)
+        : ''
     }
   },
   methods: {
     close() {
-      this.$emit("onClose");
+      this.$emit('onClose')
     },
     removeLineItem(id) {
-      this.$emit("removeLineItem", id);
+      this.$emit('removeLineItem', id)
     },
     updateLineItem({ id, quantity }) {
-      this.$emit("updateLineItem", { id: id, quantity: quantity });
+      this.$emit('updateLineItem', { id: id, quantity: quantity })
     },
     goToCheckout() {
-      this.$emit("goToCheckout")
+      this.$emit('goToCheckout')
     },
     formatPrice(amount) {
       return this.keepCents
         ? amount
-        : typeof(amount) === 'number'
-          ? amount
-          : amount.replace(".00", '').replace(".0", '')
+        : typeof amount === 'number'
+        ? amount
+        : amount.replace('.00', '').replace('.0', '')
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

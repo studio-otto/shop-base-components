@@ -81,6 +81,11 @@
           }}</span>
           <span class="cart-tray__bottom-subtotal-amount">${{ subtotal }}</span>
         </div>
+
+        <div class="cart-tray__after-checkout">
+          <slot name="afterCheckout"></slot>
+        </div>
+
         <div
           class="cart-tray__bottom-subtotal-bottom"
           v-if="subtotalBottomText"

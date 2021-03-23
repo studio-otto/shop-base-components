@@ -49,9 +49,13 @@ export default {
   },
 
   computed: {
+    fileExt() {
+      const ext = this.getExtension(this.lazySrcSet)
+      return ext
+    },
     lowRes() {
       return this.lazySrcSet.includes('cdn.shopify')
-        ? this.lazySrcSet.replace(/.png|.jpeg|.jpg/, '_20x.jpg')
+        ? this.lazySrcSet.replace(/.png|.jpeg|.jpg/, `_20x.${this.fileExt}`)
         : `${this.lazySrcSet}&width=30`
     },
 
@@ -71,7 +75,7 @@ export default {
                   this.lazySrcSet
                     ? this.lazySrcSet.replace(
                         /.png|.jpeg|.jpg/,
-                        `_${size}x.jpg`
+                        `_${size}x.${this.fileExt}`
                       )
                     : ''
                 } ${size}w`
@@ -86,6 +90,12 @@ export default {
               } ${size}w`
             })
             .join(',')
+    }
+  },
+  methods: {
+    getExtension(filename) {
+      const parts = filename.split('.')
+      return parts[parts.length - 1].split('?')[0]
     }
   }
 }

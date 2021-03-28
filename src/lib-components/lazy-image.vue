@@ -60,7 +60,7 @@ export default {
 
     maxWidthArray() {
       return this.widthSizes.filter((s) => {
-        return s < maxWidth
+        return s < this.maxWidth
       })
     },
 

@@ -193,7 +193,7 @@ export default Vue.extend({
   </div>
 </template>
 
-<style lang="scss">
+<style>
 .fade-leave-to {
   opacity: 0;
 }

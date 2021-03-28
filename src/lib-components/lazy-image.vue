@@ -4,7 +4,7 @@
     v-lazy
     class="image lazy"
     data-sizes="auto"
-    :src="lowRes"
+    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
     :data-srcset="urlString"
     :alt="altText"
     width="600"
@@ -32,6 +32,10 @@ export default {
       type: String,
       default: 'Image'
     },
+    maxWidth: {
+      type: String,
+      default: '1805'
+    },
     widthSizes: {
       type: Array,
       default: () => {
@@ -53,15 +57,16 @@ export default {
       const ext = this.getExtension(this.lazySrcSet)
       return ext
     },
-    lowRes() {
-      return this.lazySrcSet.includes('cdn.shopify')
-        ? this.lazySrcSet.replace(/.png|.jpeg|.jpg/, `_20x.${this.fileExt}`)
-        : `${this.lazySrcSet}&width=30`
+
+    maxWidthArray() {
+      return this.widthSizes.filter((s) => {
+        return s < maxWidth
+      })
     },
 
     urlString() {
       return this.lazySrcSet.includes('cdn.shopify')
-        ? this.widthSizes
+        ? this.maxWidthArray
             // SHOPIFY IMAGES
             .map((size) => {
               if (this.isFeatured) {
@@ -82,7 +87,7 @@ export default {
               }
             })
             .join(',')
-        : this.widthSizes
+        : this.maxWidthArray
             // PRISMIC IMAGES
             .map((size) => {
               return `${
@@ -101,7 +106,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .image {
   display: block;
   width: 100%;

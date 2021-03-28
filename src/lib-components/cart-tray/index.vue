@@ -108,7 +108,7 @@
   </div>
 </template>
 
-<script lang="">
+<script>
 import LineItem from './line-item.vue'
 
 export default {
@@ -173,7 +173,7 @@ export default {
     banner: {
       type: String,
       default: () => {
-        return 'Hello Otto'
+        return ''
       }
     },
     bottomText: {
@@ -185,7 +185,13 @@ export default {
     subtotalText: {
       type: String,
       default: () => {
-        return 'SUBTOTAL'
+        return 'Subtotal'
+      }
+    },
+    currencySymbol: {
+      type: String,
+      default: () => {
+        return '$'
       }
     },
     checkoutText: {
@@ -252,7 +258,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .cart-tray {
   position: fixed;
   top: 0;

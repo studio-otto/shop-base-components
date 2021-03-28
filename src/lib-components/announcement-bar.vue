@@ -78,7 +78,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .announcement-bar {
   display: flex;
   justify-content: center;

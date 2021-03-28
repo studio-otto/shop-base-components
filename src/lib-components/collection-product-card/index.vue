@@ -176,7 +176,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
 .cpc {
   ul {
     margin: 0;

@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .cpc__slider-track {
   display: flex;
   scroll-snap-type: x mandatory;
@@ -73,16 +73,12 @@ export default {
   -webkit-overflow-scrolling: touch;
   scroll-width: none;
   -ms-overflow-style: none;
-
-  // hide scrollbar
-  // padding-bottom: 30px;
   white-space: nowrap;
   overflow: auto;
   clip-path: inset(0 0 30px 0);
   margin-bottom: -30px;
 
   &::-webkit-scrollbar-track {
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.1);
     background-color: transparent;
   }
 
@@ -92,7 +88,6 @@ export default {
   }
 
   &::-webkit-scrollbar-thumb {
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: transparent;
   }
 

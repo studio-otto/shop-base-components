@@ -62,6 +62,7 @@
             :includeLineItemVariantSize="includeLineItemVariantSize"
             :includeLineItemVariantColor="includeLineItemVariantColor"
             :keepCents="keepCents"
+            :currency-symbol="currencySymbol"
             @removeLineItem="removeLineItem"
             @updateLineItem="updateLineItem"
           />
@@ -79,7 +80,8 @@
           <span class="cart-tray__bottom-subtotal-label">{{
             subtotalText
           }}</span>
-          <span class="cart-tray__bottom-subtotal-amount">${{ subtotal }}</span>
+          <span class="cart-tray__bottom-subtotal-amount">
+            {{currencySymbol}}{{ subtotal }}</span>
         </div>
 
         <div class="cart-tray__after-checkout">
@@ -190,9 +192,7 @@ export default {
     },
     currencySymbol: {
       type: String,
-      default: () => {
-        return '$'
-      }
+      default: '$'
     },
     checkoutText: {
       type: String,

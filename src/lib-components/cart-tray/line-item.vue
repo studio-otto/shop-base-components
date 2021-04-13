@@ -96,9 +96,11 @@
         v-if="hasDiscounts"
         class="cart-tray__line-item-price-discount-original line-through"
       >
-        ${{originalSubtotal}}
+        {{ currencySymbol }}{{originalSubtotal}}
       </div>
-      <div :class="['cart-tray__line-item-price', hasDiscounts ? '-discounts' : '-no-discounts']">${{lineItemSubtotal}}</div>
+      <div :class="['cart-tray__line-item-price', hasDiscounts ? '-discounts' : '-no-discounts']">
+        {{ currencySymbol }}{{ lineItemSubtotal }}
+      </div>
     </div>
   </div>
 </template>
@@ -128,7 +130,10 @@ export default {
     keepCents: {
       type: Boolean,
       default: false
-    }
+    },
+    currencySymbol: {
+      type: String
+    },
   },
   computed: {
     lineItemImage() {

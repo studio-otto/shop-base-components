@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "gsap": "^3.5.1",
+    "lazysizes": "^5.3.2",
     "smoothscroll-polyfill": "^0.4.4",
     "vanilla-lazyload": "^17.1.2",
     "vue-cookies": "^1.7.3",

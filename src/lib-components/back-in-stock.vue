@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      v-if="hasSoldOutVariant && product.available && !preselectedVariant"
+      v-if="hasSoldOutVariant && !preselectedVariant"
       class="-pointer"
       @click="toggleModal()"
     ></div>
     <Modal
-      :is-open="showingReminderModal"
+      :open="showingReminderModal"
       :can-add="false"
       class="bis-modal"
       @close="$emit('close')"

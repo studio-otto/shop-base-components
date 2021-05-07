@@ -59,11 +59,6 @@ export default {
       default: false
     },
 
-    useFade: {
-      type: Boolean,
-      default: true
-    },
-
     title: {
       type: String,
       default: ''

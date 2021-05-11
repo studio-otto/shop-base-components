@@ -79,7 +79,7 @@ export default {
                 return `${
                   this.lazySrcSet
                     ? this.lazySrcSet.replace(
-                        /.png|.jpeg|.jpg/,
+                        /\.png|\.jpeg|\.jpg/,
                         `_${size}x.${this.fileExt}`
                       )
                     : ''

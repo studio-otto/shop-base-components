@@ -95,7 +95,7 @@
           {{ subtotalBottomText }}
         </div>
         <button
-          class="cart-tray__bottom-checkout"
+          :class="['cart-tray__bottom-checkout', checkout && checkout.lineItems && checkout.lineItems.length > 0 ? '': 'disabled']"
           type="button"
           @click="goToCheckout"
           @keydown.enter="goToCheckout"

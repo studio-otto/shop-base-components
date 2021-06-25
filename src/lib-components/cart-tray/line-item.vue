@@ -2,7 +2,7 @@
   <div class="cart-tray__line-item">
     <div class="cart-tray__line-item-img">
       <router-link
-        :to="lineItem.variant.product.handle"
+        :to="`/products/${lineItem.variant.product.handle}`"
         :aria-label="`View ${lineItem.title}`"
       >
         <LazyImage
@@ -14,7 +14,7 @@
     </div>
     <div class="cart-tray__line-item-info">
       <router-link
-        :to="lineItem.variant.product.handle"
+        :to="`/products/${lineItem.variant.product.handle}`"
         :aria-label="`View ${lineItem.title}`"
       >
         <div class="cart-tray__line-item-title">{{ lineItem.title }}</div>

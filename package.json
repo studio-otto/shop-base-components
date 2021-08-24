@@ -1,7 +1,7 @@
 {
   "name": "@studio-otto/shop-base-components",
   "version": "2.5.3",
-  "description": "",
+  "description": "![](https://cirro-misc.s3.amazonaws.com/Github%20Images/base-01.jpg)",
   "main": "dist/shop-base-components.ssr.js",
   "browser": "dist/shop-base-components.esm.js",
   "module": "dist/shop-base-components.esm.js",
@@ -10,11 +10,8 @@
     "dist/*",
     "src/**/*.vue"
   ],
-  "author": "Studio Otto<https://github.com/studio-otto>",
+  "author": "Studio Otto <https://github.com/studio-otto>",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
     "test": "jest",
@@ -23,7 +20,6 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
@@ -64,5 +60,16 @@
   },
   "engines": {
     "node": ">=12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/studio-otto/shop-base-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/studio-otto/shop-base-components/issues"
+  },
+  "homepage": "https://github.com/studio-otto/shop-base-components#readme",
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001223"
   }
 }

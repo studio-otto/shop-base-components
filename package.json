@@ -1,6 +1,6 @@
 {
-  "name": "@studio-otto/shop-base-components",
-  "version": "2.5.5",
+  "name": "@studio-otto/so-base",
+  "version": "2.5.6",
   "description": "![](https://cirro-misc.s3.amazonaws.com/Github%20Images/base-01.jpg)",
   "main": "dist/shop-base-components.ssr.js",
   "browser": "dist/shop-base-components.esm.js",
@@ -10,6 +10,9 @@
     "dist/*",
     "src/**/*.vue"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "author": "Studio Otto <https://github.com/studio-otto>",
   "license": "MIT",
   "scripts": {

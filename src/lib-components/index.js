@@ -2,6 +2,7 @@
 export { default as AnnouncementBar } from './announcement-bar.vue'
 export { default as CartTray } from './cart-tray/index.vue'
 export { default as CollectionProductCard } from './collection-product-card/index.vue'
+export { default as VariantColorSelect } from './collection-product-card/variant-color-select.vue'
 export { default as LoadingCard } from './collection-product-card/loading-card.vue'
 export { default as Modal } from './modal.vue'
 export { default as CookieConsent } from './cookie-consent.vue'

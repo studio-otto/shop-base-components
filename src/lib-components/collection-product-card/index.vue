@@ -14,6 +14,7 @@
           v-if="isUsingVariantSelect"
           :product="product"
           :selectedColor="selectedColor"
+          :autoSelectFirstIfEmpty="true"
           @updateSelectedColor="(color) => this.selectedColor = color"
         />
         <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->

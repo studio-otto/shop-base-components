@@ -33,10 +33,16 @@ export default {
       default: () => {
         return "";
       }
+    },
+    autoSelectFirstIfEmpty: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
     }
   },
   mounted() {
-    if(!this.selectedColor) this.selectFirstColor()
+    if(!this.selectedColor && this.autoSelectFirstIfEmpty) this.selectFirstColor()
   },
   computed: {
     colors() {

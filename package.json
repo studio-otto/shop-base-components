@@ -1,6 +1,6 @@
 {
   "name": "@studio-otto/shop-base-components",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "description": "![](https://cirro-misc.s3.amazonaws.com/Github%20Images/base-01.jpg)",
   "main": "dist/shop-base-components.ssr.js",
   "browser": "dist/shop-base-components.esm.js",

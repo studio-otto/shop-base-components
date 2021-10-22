@@ -10,8 +10,14 @@
         @mouseover="isHovered = true"
         @mouseleave="isHovered = false"
       >
+        <VariantColorSelect
+          v-if="isUsingVariantSelect"
+          :product="product"
+          :selectedColor="selectedColor"
+          @updateSelectedColor="(color) => this.selectedColor = color"
+        />
         <!-- NOTE: maybe switch to dynamic component? https://vuejs.org/v2/guide/components.html#Dynamic-Components  -->
-        <router-link :to="url">
+        <router-link :to="variantParamUrl">
           <video
             v-if="video && usesVideos"
             :src="video.url"
@@ -61,6 +67,12 @@
         </div>
         <slot name="footer"></slot>
       </div>
+      <div
+        v-if="isUsingVariantSelect && colorCount >= 2"
+        class="cpc__available-colors-count"
+      >
+        Available in {{colorCount}} colors
+      </div>
     </div>
     <LoadingCard v-else :handle="product.handle" />
   </div>
@@ -69,17 +81,20 @@
 <script>
 import LazyImage from "../lazy-image.vue";
 import LoadingCard from './loading-card.vue';
+import VariantColorSelect from './variant-color-select.vue';
 
 export default {
   name: `CollectionProductCard`,
   components: {
     LazyImage,
     LoadingCard,
+    VariantColorSelect,
     Slider: () => import("./slider.vue")
   },
   data() {
     return {
-      isHovered: false
+      isHovered: false,
+      selectedColor: null
     };
   },
   props: {
@@ -96,6 +111,12 @@ export default {
       }
     },
     isUsingFeatured: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
+    },
+    isUsingVariantSelect: {
       type: Boolean,
       default: () => {
         return false;
@@ -140,6 +161,8 @@ export default {
     displayImage() {
       if (this.featuredImage && this.isUsingFeatured) {
         return this.featuredImage;
+      } else if(this.hasColors) {
+        return this.selectedColor && this.selectedVariant ? this.selectedVariant.image.src || this.product.images[0] : "";
       } else {
         return this.isUsingStorefront
           ? this.product.images
@@ -163,6 +186,34 @@ export default {
         : null
 
       return videoObj ? videoObj.sources.find((vid) => vid.format === 'mp4') : null
+    },
+
+    colorCount() {
+      if(!this.isUsingVariantSelect) return 0;
+      return Object.values(this.product.variants.reduce((colors, variant) => {
+        if(variant.swatch_color) {
+          const name = variant.selectedOptions[1].value
+          colors[name] = name;
+        }
+        return colors;
+      }, {})).length
+    },
+
+    hasColors() {
+      return this.colorCount >= 2;
+    },
+
+    selectedVariant() {
+      if (!this.hasColors || !this.selectedColor) return
+      return this.product.variants.find((variant) => variant.selectedOptions[1].value === this.selectedColor)
+    },
+
+    variantParamUrl() {
+      if(this.isUsingVariantSelect && this.hasColors && this.selectedVariant) {
+        return `${this.url}?color=${this.selectedVariant.selectedOptions[1].value}`;
+      } else {
+        return this.url;
+      }
     }
   },
   methods: {

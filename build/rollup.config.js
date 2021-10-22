@@ -8,7 +8,6 @@ import replace from "@rollup/plugin-replace";
 import babel from "rollup-plugin-babel";
 import { terser } from "rollup-plugin-terser";
 import minimist from "minimist";
-import scss from "rollup-plugin-scss";
 import resolve from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 
@@ -105,7 +104,6 @@ if (!argv.format || argv.format === "es") {
       }),
       resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
-      scss(),
       json()
     ]
   };
@@ -138,7 +136,6 @@ if (!argv.format || argv.format === "cjs") {
       babel(baseConfig.plugins.babel),
       resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
-      scss(),
       json()
     ]
   };
@@ -165,7 +162,6 @@ if (!argv.format || argv.format === "iife") {
       babel(baseConfig.plugins.babel),
       resolve({ preferBuiltins: true, browser: true }),
       commonjs(),
-      scss(),
       json(),
       terser({
         output: {

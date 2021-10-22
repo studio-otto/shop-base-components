@@ -2,15 +2,13 @@
 
 ## Installation
 
-Create `.npmrc` file in project directory
-```
-@studio-otto:registry=https://npm.pkg.github.com
-```
-
 Install package
 ```bash
 yarn add @studio-otto/shop-base-components
 ```
+
+[NVM Page](https://www.npmjs.com/package/@studio-otto/shop-base-components)
+
 
 ## Developing
 <details>

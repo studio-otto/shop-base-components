@@ -10,24 +10,24 @@
           }"
           v-model="userEmail"
           name="email"
-          @focus="inputFocused()"
+          :placeholder="inputPlaceholder"
           type="text"
-          placeholder="Email"
-          @keydown.enter="sendForm()"
           tabindex="0"
           title="Email address"
           aria-label="Email Address"
+          @focus="inputFocused()"
+          @keydown.enter="sendForm()"
         />
 			</div>
 
 			<button
         type="button"
         class="klaviyo-form__submit"
+        tabindex="0"
+        :aria-label="submitText"
+        :disabled="!isValid"
         @click="sendForm()"
         @keydown.enter="sendForm()"
-        :aria-label="submitText"
-        tabindex="0"
-        :disabled="!isValid"
       >
           <span v-if="isSending" class="klaviyo-form__submitting"></span>
           <span v-if="isSending" class="klaviyo-form__disabled">{{ submitText }}</span>
@@ -51,6 +51,12 @@ export default {
       type: String,
       default: () => {
         return `Sign Up`
+      }
+    },
+    inputPlaceholder: {
+      type: String,
+      default: () => {
+        return `Email`
       }
     }
   },

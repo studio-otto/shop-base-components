@@ -30,15 +30,15 @@ export default {
     },
     selectedColor: {
       type: String,
-      default: () => {
-        return "";
-      }
+      default: ''
     },
     autoSelectFirstIfEmpty: {
       type: Boolean,
-      default: () => {
-        return false;
-      }
+      default: false
+    },
+    alwaysShow: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
@@ -59,7 +59,7 @@ export default {
     },
 
     hasColors() {
-      return this.colors.length >= 2;
+      return this.alwaysShow && this.colors.length >= 1;
     }
   },
   methods: {

@@ -36,10 +36,6 @@ export default {
       type: Boolean,
       default: false
     },
-    alwaysShow: {
-      type: Boolean,
-      default: false
-    },
     minimumColors: {
       type: Number,
       default: 2
@@ -63,7 +59,7 @@ export default {
     },
 
     hasColors() {
-      return this.alwaysShow && this.colors.length >= this.minimumColors;
+      return this.colors.length >= this.minimumColors;
     }
   },
   methods: {

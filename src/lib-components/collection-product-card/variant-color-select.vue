@@ -39,6 +39,10 @@ export default {
     alwaysShow: {
       type: Boolean,
       default: false
+    },
+    minimumColors: {
+      type: Number,
+      default: 2
     }
   },
   mounted() {
@@ -59,7 +63,7 @@ export default {
     },
 
     hasColors() {
-      return this.alwaysShow && this.colors.length >= 1;
+      return this.alwaysShow && this.colors.length >= this.minimumColors;
     }
   },
   methods: {

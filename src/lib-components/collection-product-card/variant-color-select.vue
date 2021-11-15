@@ -78,9 +78,11 @@ export default {
       const firstColor = this.product.variants.find((variant) => {
         return !!variant.swatch_color
       })
-      this.updateSelectedColor(
-        firstColor ? firstColor.selectedOptions[1].value : ''
-      )
+      const color = firstColor ?
+        firstColor.selectedOptions && firstColor.selectedOptions.length > 1 && firstColor.selectedOptions[1].value ?
+         firstColor.selectedOptions[1].value : ''
+           : ''
+      this.updateSelectedColor(color)
     }
   }
 }

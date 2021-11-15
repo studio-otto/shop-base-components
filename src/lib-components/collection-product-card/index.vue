@@ -223,7 +223,11 @@ export default {
       this.isHovered = !this.isHovered;
     },
     noZeros(price) {
-      return price.replace('.00', '')
+      const newPrice = price.replace('.00', '')
+      const priceWithComma = newPrice
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return priceWithComma
     }
   }
 };

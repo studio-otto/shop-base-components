@@ -1,6 +1,7 @@
 <template>
   <div class="cpc" data-testid="cpc">
     <div v-if="product && product.isLoaded">
+      <slot name="header"></slot>
       <div
         :class="[
           'cpc__image',
@@ -192,7 +193,7 @@ export default {
     colorCount() {
       if(!this.isUsingVariantSelect) return 0;
       return Object.values(this.product.variants.reduce((colors, variant) => {
-        if(variant.swatch_color) {
+        if(variant.swatch_color && variant.selectedOptions && variant.selectedOptions.length > 1) {
           const name = variant.selectedOptions[1].value
           colors[name] = name;
         }

@@ -46,7 +46,7 @@ export default {
     colors() {
       return Object.values(
         this.product.variants.reduce((colors, variant) => {
-          if (variant.swatch_color) {
+          if (variant.swatch_color && variant.selectedOptions && variant.selectedOptions.length > 1) {
             const name = variant.selectedOptions[1].value
             const isSelected = this.selectedColor && this.selectedColor === name
             colors[name] = {

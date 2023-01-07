@@ -56,11 +56,11 @@
               ${{
                 noZeros(product.compareAtPrice
                   ? product.compareAtPrice
-                  : product.variants[0].compareAtPrice)
+                  : product.variants[0].compareAtPrice.amount)
               }}
             </span>
             <span class="cpc__details-price">
-              ${{ noZeros(product.price ? product.price : product.variants[0].price) }}
+              ${{ noZeros(product.price ? product.price : product.variants[0].price.amount) }}
             </span>
           </span>
           <span v-else>

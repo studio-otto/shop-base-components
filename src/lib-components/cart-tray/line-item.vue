@@ -158,12 +158,12 @@ export default {
       return this.lineItem && this.lineItem.discountAllocations && this.lineItem.discountAllocations.length > 0
     },
     originalSubtotal() {
-      return this.formatPrice(this.lineItem.variant.price * this.lineItem.quantity)
+      return this.formatPrice(Number(this.lineItem.variant.price.amount) * this.lineItem.quantity)
     },
     lineItemSubtotal() {
       const discountAmount = this.hasDiscounts ? this.lineItem.discountAllocations[0].allocatedAmount.amount : "0"
       return this.hasDiscounts
-        ? this.formatPrice((this.lineItem.variant.price * this.lineItem.quantity) - discountAmount)
+        ? this.formatPrice((Number(this.lineItem.variant.price.amount) * this.lineItem.quantity) - discountAmount)
         : this.originalSubtotal      
     }
   },
